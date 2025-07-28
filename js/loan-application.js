@@ -266,8 +266,21 @@ function goToPersonalDetails() {
 }
 
 function goToEmploymentDetails() {
-    if (!validatePersonalDetails()) {
+    // Check if we're currently on personal-info sub-step
+    if (loanApplicationState.currentSubStep === 'personal-info') {
+        // Validate only personal info fields and move to address info
+        if (!validatePersonalInfoOnly()) {
+            return;
+        }
+        showAddressInfo();
         return;
+    }
+    
+    // If we're on address-info, validate only address info fields and proceed
+    if (loanApplicationState.currentSubStep === 'address-info') {
+        if (!validateAddressInfoOnly()) {
+            return;
+        }
     }
     
     showPage('employment-details-page');
@@ -363,6 +376,7 @@ function showPersonalInfo() {
     }
     
     loanApplicationState.currentSubStep = 'personal-info';
+    updatePersonalDetailsButton();
 }
 
 function showAddressInfo() {
@@ -375,6 +389,30 @@ function showAddressInfo() {
     }
     
     loanApplicationState.currentSubStep = 'address-info';
+    updatePersonalDetailsButton();
+}
+
+function updatePersonalDetailsButton() {
+    const nextButton = document.querySelector('#personal-details-page .btn-primary');
+    const backButton = document.querySelector('#personal-details-page .btn-secondary');
+    
+    if (nextButton) {
+        if (loanApplicationState.currentSubStep === 'personal-info') {
+            nextButton.innerHTML = 'CONTINUE TO ADDRESS <i class="fas fa-arrow-right"></i>';
+        } else if (loanApplicationState.currentSubStep === 'address-info') {
+            nextButton.innerHTML = 'NEXT <i class="fas fa-arrow-right"></i>';
+        }
+    }
+    
+    if (backButton) {
+        if (loanApplicationState.currentSubStep === 'personal-info') {
+            backButton.onclick = goToUploadDocuments;
+            backButton.innerHTML = 'BACK';
+        } else if (loanApplicationState.currentSubStep === 'address-info') {
+            backButton.onclick = showPersonalInfo;
+            backButton.innerHTML = 'BACK TO PERSONAL INFO';
+        }
+    }
 }
 
 // File Selection Function
@@ -404,18 +442,90 @@ function validateLoanDetails() {
     return true;
 }
 
-function validatePersonalDetails() {
-    const requiredFields = [
-        'fullName', 'dob', 'countryBirth', 'taxId', 'education',
-        'residentialStatus', 'residingYears', 'fatherName', 'motherName',
-        'nationality', 'maritalStatus', 'presentAddress', 'permanentAddress',
-        'emailId', 'mobile1'
-    ];
+function validatePersonalInfoOnly() {
+    const requiredFields = {
+        'fullName': 'Full Name',
+        'dob': 'Date of Birth',
+        'countryBirth': 'Country of Birth',
+        'taxId': 'Tax ID',
+        'education': 'Education',
+        'residentialStatus': 'Residential Status',
+        'residingYears': 'Years of Residing',
+        'fatherName': 'Father\'s Name',
+        'motherName': 'Mother\'s Name',
+        'nationality': 'Nationality',
+        'maritalStatus': 'Marital Status'
+    };
     
-    for (let fieldId of requiredFields) {
+    for (let [fieldId, fieldName] of Object.entries(requiredFields)) {
         const field = document.getElementById(fieldId);
         if (field && !field.value.trim()) {
-            showMessage(`Please fill in ${field.previousElementSibling.textContent}`, 'error');
+            showMessage(`Please fill in ${fieldName}`, 'error');
+            field.focus();
+            return false;
+        }
+    }
+    
+    return true;
+}
+
+function validateAddressInfoOnly() {
+    const requiredFields = {
+        'presentAddress': 'Present Address',
+        'permanentAddress': 'Permanent Address',
+        'emailId': 'Email ID',
+        'mobile1': 'Mobile Number'
+    };
+    
+    for (let [fieldId, fieldName] of Object.entries(requiredFields)) {
+        const field = document.getElementById(fieldId);
+        if (field && !field.value.trim()) {
+            showMessage(`Please fill in ${fieldName}`, 'error');
+            field.focus();
+            return false;
+        }
+    }
+    
+    // Validate email format
+    const email = document.getElementById('emailId')?.value;
+    if (email && !isValidEmail(email)) {
+        showMessage('Please enter a valid email address', 'error');
+        return false;
+    }
+    
+    // Validate mobile number
+    const mobile = document.getElementById('mobile1')?.value;
+    if (mobile && !isValidMobile(mobile)) {
+        showMessage('Please enter a valid mobile number', 'error');
+        return false;
+    }
+    
+    return true;
+}
+
+function validatePersonalDetails() {
+    const requiredFields = {
+        'fullName': 'Full Name',
+        'dob': 'Date of Birth',
+        'countryBirth': 'Country of Birth',
+        'taxId': 'Tax ID',
+        'education': 'Education',
+        'residentialStatus': 'Residential Status',
+        'residingYears': 'Years of Residing',
+        'fatherName': 'Father\'s Name',
+        'motherName': 'Mother\'s Name',
+        'nationality': 'Nationality',
+        'maritalStatus': 'Marital Status',
+        'presentAddress': 'Present Address',
+        'permanentAddress': 'Permanent Address',
+        'emailId': 'Email ID',
+        'mobile1': 'Mobile Number'
+    };
+    
+    for (let [fieldId, fieldName] of Object.entries(requiredFields)) {
+        const field = document.getElementById(fieldId);
+        if (field && !field.value.trim()) {
+            showMessage(`Please fill in ${fieldName}`, 'error');
             field.focus();
             return false;
         }
@@ -439,15 +549,21 @@ function validatePersonalDetails() {
 }
 
 function validateEmploymentDetails() {
-    const requiredFields = [
-        'employmentType', 'companyName', 'designation', 'workExperience',
-        'currentJobExperience', 'monthlyIncome', 'companyAddress', 'companyPhone'
-    ];
+    const requiredFields = {
+        'employmentType': 'Employment Type',
+        'companyName': 'Company Name',
+        'designation': 'Designation',
+        'workExperience': 'Work Experience',
+        'currentJobExperience': 'Current Job Experience',
+        'monthlyIncome': 'Monthly Income',
+        'companyAddress': 'Company Address',
+        'companyPhone': 'Company Phone'
+    };
     
-    for (let fieldId of requiredFields) {
+    for (let [fieldId, fieldName] of Object.entries(requiredFields)) {
         const field = document.getElementById(fieldId);
         if (field && !field.value.trim()) {
-            showMessage(`Please fill in ${field.previousElementSibling.textContent}`, 'error');
+            showMessage(`Please fill in ${fieldName}`, 'error');
             field.focus();
             return false;
         }
@@ -464,15 +580,19 @@ function validateEmploymentDetails() {
 }
 
 function validateFinancialInfo() {
-    const requiredFields = [
-        'bankName', 'accountNumber', 'ifscCode', 'accountType',
-        'accountBalance', 'monthlyExpenses'
-    ];
+    const requiredFields = {
+        'bankName': 'Bank Name',
+        'accountNumber': 'Account Number',
+        'ifscCode': 'IFSC Code',
+        'accountType': 'Account Type',
+        'accountBalance': 'Current Balance',
+        'monthlyExpenses': 'Monthly Expenses'
+    };
     
-    for (let fieldId of requiredFields) {
+    for (let [fieldId, fieldName] of Object.entries(requiredFields)) {
         const field = document.getElementById(fieldId);
         if (field && !field.value.trim()) {
-            showMessage(`Please fill in ${field.previousElementSibling.textContent}`, 'error');
+            showMessage(`Please fill in ${fieldName}`, 'error');
             field.focus();
             return false;
         }
@@ -485,6 +605,13 @@ function validateFinancialInfo() {
         return false;
     }
     
+    // Validate monthly expenses
+    const monthlyExpenses = document.getElementById('monthlyExpenses')?.value;
+    if (monthlyExpenses && parseFloat(monthlyExpenses) < 0) {
+        showMessage('Please enter a valid monthly expenses amount', 'error');
+        return false;
+    }
+    
     // Validate existing loan details if selected
     const existingLoans = document.querySelector('input[name="existingLoans"]:checked')?.value;
     if (existingLoans === 'yes') {
@@ -492,7 +619,17 @@ function validateFinancialInfo() {
         const existingLoanEmi = document.getElementById('existingLoanEmi')?.value;
         
         if (!existingLoanAmount || !existingLoanEmi) {
-            showMessage('Please provide existing loan details', 'error');
+            showMessage('Please provide existing loan details (amount and EMI)', 'error');
+            return false;
+        }
+        
+        if (parseFloat(existingLoanAmount) <= 0) {
+            showMessage('Please enter a valid existing loan amount', 'error');
+            return false;
+        }
+        
+        if (parseFloat(existingLoanEmi) <= 0) {
+            showMessage('Please enter a valid existing loan EMI', 'error');
             return false;
         }
     }
@@ -501,14 +638,17 @@ function validateFinancialInfo() {
 }
 
 function validateFamilyDetails() {
-    const requiredFields = [
-        'emergencyName', 'emergencyRelation', 'emergencyPhone', 'emergencyAddress'
-    ];
+    const requiredFields = {
+        'emergencyName': 'Emergency Contact Name',
+        'emergencyRelation': 'Emergency Contact Relation',
+        'emergencyPhone': 'Emergency Contact Phone',
+        'emergencyAddress': 'Emergency Contact Address'
+    };
     
-    for (let fieldId of requiredFields) {
+    for (let [fieldId, fieldName] of Object.entries(requiredFields)) {
         const field = document.getElementById(fieldId);
         if (field && !field.value.trim()) {
-            showMessage(`Please fill in ${field.previousElementSibling.textContent}`, 'error');
+            showMessage(`Please fill in ${fieldName}`, 'error');
             field.focus();
             return false;
         }
@@ -665,13 +805,43 @@ function showMessage(message, type = 'info') {
         <button onclick="this.parentElement.remove()" style="background: none; border: none; color: inherit; margin-left: 10px; cursor: pointer; font-size: 16px;">&times;</button>
     `;
     
+    // Add styles
+    messageDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 5px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        animation: slideIn 0.3s ease-out;
+        max-width: 400px;
+        word-wrap: break-word;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    `;
+    
+    // Set background color based on type
+    if (type === 'error') {
+        messageDiv.style.backgroundColor = '#dc3545';
+    } else if (type === 'success') {
+        messageDiv.style.backgroundColor = '#28a745';
+    } else {
+        messageDiv.style.backgroundColor = '#17a2b8';
+    }
+    
     // Add to body
     document.body.appendChild(messageDiv);
     
     // Auto remove after 5 seconds
     setTimeout(() => {
         if (messageDiv.parentElement) {
-            messageDiv.remove();
+            messageDiv.style.animation = 'slideOut 0.3s ease-in';
+            setTimeout(() => {
+                if (messageDiv.parentElement) {
+                    messageDiv.remove();
+                }
+            }, 300);
         }
     }, 5000);
 }
@@ -689,6 +859,17 @@ if (!document.querySelector('#message-styles')) {
             to {
                 transform: translateX(0);
                 opacity: 1;
+            }
+        }
+        
+        @keyframes slideOut {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
             }
         }
     `;
