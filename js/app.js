@@ -46,7 +46,11 @@ function checkAuthStatus() {
     if (isAuthenticated && userRole) {
         appState.isAuthenticated = true;
         appState.userRole = userRole;
-        navigateToDashboard();
+        
+        // Only navigate to dashboard if we're on the main page
+        if (document.getElementById('loginPage') && document.getElementById('dashboardPage')) {
+            navigateToDashboard();
+        }
     }
 }
 
@@ -197,46 +201,64 @@ function handleLogout() {
  * Navigate to dashboard page
  */
 function navigateToDashboard() {
-    // Hide login page
-    document.getElementById('loginPage').classList.remove('active');
+    const loginPage = document.getElementById('loginPage');
+    const dashboardPage = document.getElementById('dashboardPage');
     
-    // Show dashboard page
-    document.getElementById('dashboardPage').classList.add('active');
-    
-    // Update app state
-    appState.currentPage = 'dashboardPage';
-    
-    // Initialize dashboard
-    initDashboard();
+    // Only proceed if elements exist
+    if (loginPage && dashboardPage) {
+        // Hide login page
+        loginPage.classList.remove('active');
+        
+        // Show dashboard page
+        dashboardPage.classList.add('active');
+        
+        // Update app state
+        appState.currentPage = 'dashboardPage';
+        
+        // Initialize dashboard
+        initDashboard();
+    } else {
+        // If we're not on the main page, redirect to dashboard
+        window.location.href = 'dashboard.html';
+    }
 }
 
 /**
  * Navigate to login page
  */
 function navigateToLogin() {
-    // Hide dashboard page
-    document.getElementById('dashboardPage').classList.remove('active');
+    const loginPage = document.getElementById('loginPage');
+    const dashboardPage = document.getElementById('dashboardPage');
     
-    // Show login page
-    document.getElementById('loginPage').classList.add('active');
-    
-    // Update app state
-    appState.currentPage = 'loginPage';
-    
-    // Reset login form
-    const loginForm = document.getElementById('loginForm');
-    if (loginForm) {
-        loginForm.reset();
-    }
-    
-    // Reset role selector
-    const roleOptions = document.querySelectorAll('.role-option');
-    roleOptions.forEach(opt => opt.classList.remove('selected'));
-    
-    // Disable sign in button
-    const signInBtn = document.querySelector('.sign-in-btn');
-    if (signInBtn) {
-        signInBtn.disabled = true;
+    // Only proceed if elements exist
+    if (loginPage && dashboardPage) {
+        // Hide dashboard page
+        dashboardPage.classList.remove('active');
+        
+        // Show login page
+        loginPage.classList.add('active');
+        
+        // Update app state
+        appState.currentPage = 'loginPage';
+        
+        // Reset login form
+        const loginForm = document.getElementById('loginForm');
+        if (loginForm) {
+            loginForm.reset();
+        }
+        
+        // Reset role selector
+        const roleOptions = document.querySelectorAll('.role-option');
+        roleOptions.forEach(opt => opt.classList.remove('selected'));
+        
+        // Disable sign in button
+        const signInBtn = document.querySelector('.sign-in-btn');
+        if (signInBtn) {
+            signInBtn.disabled = true;
+        }
+    } else {
+        // If we're not on the main page, redirect to index
+        window.location.href = 'index.html';
     }
 }
 
