@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application - Loan Accelerator</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/pages.css">
+    <link rel="stylesheet" href="styles/loan-application.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-left">
+            <div class="logo">
+                <i class="fas fa-clock"></i>
+                <span>LOAN ACCELERATOR</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-icons">
+                <div class="notification-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">1</span>
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM0Mjg1RjQiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik04IDhDMTAuMjA5MSA4IDEyIDYuMjA5MTQgMTIgNEMxMiAxLjc5MDg2IDEwLjIwOTEgMCA4IDBDNS43OTA4NiAwIDQgMS43OTA4NiA0IDRDNCA2LjIwOTE0IDUuNzkwODYgOCA4IDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNOCAxMEMzLjU4MTcyIDEwIDAgMTMuNTgxNyAwIDE4SDE2QzE2IDEzLjU4MTcgMTIuNDE4MyAxMCA4IDEwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo=" alt="User">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" onclick="showDashboard()"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li class="active"><a href="#" onclick="showLoanApplication()"><i class="fas fa-file-alt"></i> Apply Loan</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> EMI Calculator</a></li>
+                <li><a href="#"><i class="fas fa-tags"></i> FAQs</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Loan Category Selection Page -->
+        <div id="loan-category-page" class="loan-page active">
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-icon"><i class="fas fa-user"></i></span>
+                    <span>Personal Loan</span>
+                </div>
+                <button class="back-to-dashboard" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Go back to Dashboard
+                </button>
+            </div>
+
+            <div class="loan-content">
+                <div class="left-section">
+                    <div class="loan-info">
+                        <div class="loan-icon">
+                            <i class="fas fa-lock"></i>
+                        </div>
+                        <h2>A few clicks away from applying your loan.</h2>
+                        <p>Avail quick & easy Personal Loans from the comfort of your home. Apply online & get instant approval.</p>
+                    </div>
+                    <div class="document-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="loan-category-container">
+                        <h3>Select loan category</h3>
+                        <p>Applying your loan is just a few steps away. Select any one of the loan type to continue.</p>
+                        
+                        <div class="loan-categories">
+                            <div class="loan-category" data-category="medical">
+                                <div class="category-icon">
+                                    <i class="fas fa-plus"></i>
+                                </div>
+                                <span>Medical Loan</span>
+                            </div>
+                            <div class="loan-category" data-category="education">
+                                <div class="category-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <span>Education Loan</span>
+                            </div>
+                            <div class="loan-category" data-category="debt">
+                                <div class="category-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <span>Debt Consolidation Loan</span>
+                            </div>
+                            <div class="loan-category" data-category="business">
+                                <div class="category-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <span>Small Business Loan</span>
+                            </div>
+                            <div class="loan-category" data-category="creditcard">
+                                <div class="category-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <span>Creditcard Loan</span>
+                            </div>
+                            <div class="loan-category" data-category="vehicle">
+                                <div class="category-icon">
+                                    <i class="fas fa-car"></i>
+                                </div>
+                                <span>Vehicle Loan</span>
+                            </div>
+                            <div class="loan-category" data-category="consumer">
+                                <div class="category-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <span>Consumer Loan</span>
+                            </div>
+                            <div class="loan-category" data-category="personal">
+                                <div class="category-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span>Personal Loan</span>
+                            </div>
+                            <div class="loan-category" data-category="housing">
+                                <div class="category-icon">
+                                    <i class="fas fa-home"></i>
+                                </div>
+                                <span>Housing Loan</span>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-primary next-btn" onclick="goToLoanDetailsFromCategory()" disabled>
+                                NEXT <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Section for Loan Category -->
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <h4>Summary</h4>
+                        <div class="summary-item">
+                            <span class="label">Selected Category</span>
+                            <span class="value" id="selectedCategoryDisplay">Not selected</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Application Status</span>
+                            <span class="value">In Progress</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loan Details Page -->
+        <div id="loan-details-page" class="loan-page">
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-icon"><i class="fas fa-user"></i></span>
+                    <span>Personal Loan</span>
+                </div>
+                <button class="back-to-dashboard" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Go back to Dashboard
+                </button>
+            </div>
+
+            <div class="loan-content">
+                <div class="left-section">
+                    <div class="step-navigation">
+                        <div class="step completed">
+                            <span class="step-number">1</span>
+                            <span class="step-label">Loan Details</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">2</span>
+                            <span class="step-label">Upload Documents</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <span class="step-label">Personal Details</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <span class="step-label">Employment Details</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">5</span>
+                            <span class="step-label">Financial Information</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">6</span>
+                            <span class="step-label">Declaration</span>
+                        </div>
+                    </div>
+                    <div class="document-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="form-container">
+                        <h3>Loan Details</h3>
+                        <p>Enter your loan details to proceed to the next step</p>
+                        
+                        <div class="loan-type-tabs">
+                            <button class="tab-btn active" data-tab="new">New Loan</button>
+                            <button class="tab-btn" data-tab="topup">Top up</button>
+                            <button class="tab-btn" data-tab="takeover">Take Over</button>
+                        </div>
+
+                        <form class="loan-details-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="appliedAmount">Applied Amount</label>
+                                    <input type="number" id="appliedAmount" name="appliedAmount" placeholder="Enter amount" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="tenure">Tenure</label>
+                                    <select id="tenure" name="tenure" required>
+                                        <option value="">Select tenure</option>
+                                        <option value="12">12 months</option>
+                                        <option value="24">24 months</option>
+                                        <option value="36">36 months</option>
+                                        <option value="48">48 months</option>
+                                        <option value="60">60 months</option>
+                                        <option value="72">72 months</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="appliedDate">Applied Date</label>
+                                    <input type="date" id="appliedDate" name="appliedDate" required>
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" onclick="goToLoanCategory()">BACK</button>
+                            <button class="btn btn-primary" onclick="goToUploadDocuments()">
+                                NEXT <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <h4>Summary</h4>
+                        <div class="summary-item">
+                            <span class="label">Loan Amount</span>
+                            <span class="value" id="summaryAmount">₹ 72,207</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Tenure</span>
+                            <span class="value" id="summaryTenure">72 months</span>
+                        </div>
+                        <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Documents Page -->
+        <div id="upload-documents-page" class="loan-page">
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-icon"><i class="fas fa-user"></i></span>
+                    <span>Personal Loan</span>
+                </div>
+                <button class="back-to-dashboard" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Go back to Dashboard
+                </button>
+            </div>
+
+            <div class="loan-content">
+                <div class="left-section">
+                    <div class="step-navigation">
+                        <div class="step completed">
+                            <span class="step-number"><i class="fas fa-check"></i></span>
+                            <span class="step-label">Loan Details</span>
+                        </div>
+                        <div class="step active">
+                            <span class="step-number">2</span>
+                            <span class="step-label">Upload Documents</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">3</span>
+                            <span class="step-label">Personal Details</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <span class="step-label">Employment Details</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">5</span>
+                            <span class="step-label">Financial Information</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">6</span>
+                            <span class="step-label">Declaration</span>
+                        </div>
+                    </div>
+                    <div class="document-icon">
+                        <i class="fas fa-file-upload"></i>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="form-container">
+                        <h3>Upload Documents</h3>
+                        <p>Upload the documents listed below for verification purposes</p>
+                        
+                        <div class="document-uploads">
+                            <div class="document-upload">
+                                <button class="upload-btn" onclick="selectFile('aadhar')">
+                                    Select File
+                                </button>
+                                <span class="file-status">No file selected</span>
+                                <small>*Upload aadhar card (front side) (jpg) (PNG)</small>
+                                <input type="file" id="aadhar" accept=".jpg,.jpeg,.png" style="display: none;">
+                            </div>
+                            <div class="document-upload">
+                                <button class="upload-btn" onclick="selectFile('aadharBack')">
+                                    Select File
+                                </button>
+                                <span class="file-status">No file selected</span>
+                                <small>*Upload Sign (jpg) (PNG)</small>
+                                <input type="file" id="aadharBack" accept=".jpg,.jpeg,.png" style="display: none;">
+                            </div>
+                            <div class="document-upload">
+                                <button class="upload-btn" onclick="selectFile('photo')">
+                                    Select File
+                                </button>
+                                <span class="file-status">No file selected</span>
+                                <small>*ID Proof(jpg) (PNG)</small>
+                                <input type="file" id="photo" accept=".jpg,.jpeg,.png" style="display: none;">
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" onclick="goToLoanDetails()">BACK</button>
+                            <button class="btn btn-primary" onclick="goToPersonalDetails()">
+                                NEXT <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <h4>Summary</h4>
+                        <div class="summary-item">
+                            <span class="label">Loan Amount</span>
+                            <span class="value">₹ 72,207</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Tenure</span>
+                            <span class="value">72 months</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Document uploaded</span>
+                            <span class="value status-success">Successfully</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Details Page -->
+        <div id="personal-details-page" class="loan-page">
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <span class="breadcrumb-icon"><i class="fas fa-user"></i></span>
+                    <span>Personal Loan</span>
+                </div>
+                <button class="back-to-dashboard" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Go back to Dashboard
+                </button>
+            </div>
+
+            <div class="loan-content">
+                <div class="left-section">
+                    <div class="step-navigation">
+                        <div class="step completed">
+                            <span class="step-number"><i class="fas fa-check"></i></span>
+                            <span class="step-label">Loan Details</span>
+                        </div>
+                        <div class="step completed">
+                            <span class="step-number"><i class="fas fa-check"></i></span>
+                            <span class="step-label">Upload Documents</span>
+                        </div>
+                        <div class="step active">
+                            <span class="step-number">3</span>
+                            <span class="step-label">Personal Details</span>
+                        </div>
+                        <div class="step-sub">
+                            <span class="step-label">Personal Information</span>
+                        </div>
+                        <div class="step-sub active">
+                            <span class="step-label">Address Information</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </div>
+                        <div class="step-sub">
+                            <span class="step-label">Family & Emergency Details</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">4</span>
+                            <span class="step-label">Employment Details</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">5</span>
+                            <span class="step-label">Financial Information</span>
+                        </div>
+                        <div class="step">
+                            <span class="step-number">6</span>
+                            <span class="step-label">Declaration</span>
+                        </div>
+                    </div>
+                    <div class="document-icon">
+                        <i class="fas fa-user-edit"></i>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="form-container">
+                        <div class="personal-info-section active" id="personal-info">
+                            <h3>Personal Information</h3>
+                            <p>Enter your personal information as mentioned in Id's</p>
+                            
+                            <form class="personal-info-form">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="fullName">Full Name*</label>
+                                        <input type="text" id="fullName" name="fullName" placeholder="Enter full name" required>
+                                        <small>Same as ID Proof</small>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dob">DOB*</label>
+                                        <input type="date" id="dob" name="dob" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="district">District of Birth</label>
+                                        <select id="district" name="district">
+                                            <option value="">Select district</option>
+                                            <option value="mumbai">Mumbai</option>
+                                            <option value="pune">Pune</option>
+                                            <option value="delhi">Delhi</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="countryBirth">Country of Birth*</label>
+                                        <select id="countryBirth" name="countryBirth" required>
+                                            <option value="">Select country</option>
+                                            <option value="india">India</option>
+                                            <option value="usa">USA</option>
+                                            <option value="uk">UK</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="taxId">Tax ID number (GTIN)*</label>
+                                        <input type="text" id="taxId" name="taxId" placeholder="Enter tax ID" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="education">Education Qualification*</label>
+                                        <select id="education" name="education" required>
+                                            <option value="">Select qualification</option>
+                                            <option value="graduate">Graduate</option>
+                                            <option value="postgraduate">Post Graduate</option>
+                                            <option value="diploma">Diploma</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="residentialStatus">Residential Status*</label>
+                                        <select id="residentialStatus" name="residentialStatus" required>
+                                            <option value="">Select status</option>
+                                            <option value="resident">Resident</option>
+                                            <option value="nonresident">Non-Resident</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="residingYears">Residing for (in Years)*</label>
+                                        <input type="number" id="residingYears" name="residingYears" placeholder="Enter years" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gender">Gender</label>
+                                        <select id="gender" name="gender">
+                                            <option value="">Select gender</option>
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group full-width">
+                                        <label>Are you an Existing Customer?</label>
+                                        <div class="radio-group">
+                                            <label class="radio-label">
+                                                <input type="radio" name="existingCustomer" value="yes">
+                                                <span class="radio-custom"></span>
+                                                Yes
+                                            </label>
+                                            <label class="radio-label">
+                                                <input type="radio" name="existingCustomer" value="no" checked>
+                                                <span class="radio-custom"></span>
+                                                No
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="fatherName">Father's Name*</label>
+                                        <input type="text" id="fatherName" name="fatherName" placeholder="Enter father's name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="motherName">Mother's Name*</label>
+                                        <input type="text" id="motherName" name="motherName" placeholder="Enter mother's name" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nationalId">National ID</label>
+                                        <input type="text" id="nationalId" name="nationalId" placeholder="Enter national ID">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="dateOfInsurance">Date of Insurance</label>
+                                        <input type="date" id="dateOfInsurance" name="dateOfInsurance">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="countryOfInsurance">Country of Insurance</label>
+                                        <select id="countryOfInsurance" name="countryOfInsurance">
+                                            <option value="">Select country</option>
+                                            <option value="india">India</option>
+                                            <option value="usa">USA</option>
+                                            <option value="uk">UK</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="nationality">Nationality*</label>
+                                        <input type="text" id="nationality" name="nationality" placeholder="Enter nationality" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="maritalStatus">Marital Status*</label>
+                                        <select id="maritalStatus" name="maritalStatus" required>
+                                            <option value="">Select status</option>
+                                            <option value="single">Single</option>
+                                            <option value="married">Married</option>
+                                            <option value="divorced">Divorced</option>
+                                            <option value="widowed">Widowed</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="personal-info-section" id="address-info">
+                            <h3>Address Information</h3>
+                            <p>Enter your address information as mentioned in Id's</p>
+                            
+                            <form class="address-info-form">
+                                <div class="form-row">
+                                    <div class="form-group full-width">
+                                        <label for="presentAddress">Present Address* (Residential)</label>
+                                        <textarea id="presentAddress" name="presentAddress" rows="3" placeholder="Enter present address" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group full-width">
+                                        <label for="permanentAddress">Permanent Address*</label>
+                                        <textarea id="permanentAddress" name="permanentAddress" rows="3" placeholder="Enter permanent address" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="district2">District</label>
+                                        <input type="text" id="district2" name="district2" placeholder="Enter district">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="country">Country</label>
+                                        <input type="text" id="country" name="country" placeholder="Enter country">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailId">Email ID*</label>
+                                        <input type="email" id="emailId" name="emailId" placeholder="Enter email ID" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="mobile1">Mobile 1*</label>
+                                        <input type="tel" id="mobile1" name="mobile1" placeholder="Enter mobile number" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="mobile2">Mobile 2</label>
+                                        <input type="tel" id="mobile2" name="mobile2" placeholder="Enter mobile number">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telephone">Telephone no.</label>
+                                        <input type="tel" id="telephone" name="telephone" placeholder="Enter telephone number">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" onclick="goToUploadDocuments()">BACK</button>
+                            <button class="btn btn-primary" onclick="goToEmploymentDetails()">
+                                NEXT <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <h4>Summary</h4>
+                        <div class="summary-item">
+                            <span class="label">Loan Amount</span>
+                            <span class="value">₹ 72,207</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Tenure</span>
+                            <span class="value">72 months</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Document uploaded</span>
+                            <span class="value status-success">Successfully</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Full Name</span>
+                            <span class="value">John Mathew</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">D.O.B</span>
+                            <span class="value">12/08/1990</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Tax ID</span>
+                            <span class="value">04873PNAX</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Employment Details Page -->
+        <div class="loan-page" id="employment-details-page">
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <span>Loan Application</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Employment Details</span>
+                </div>
+                <button class="back-to-dashboard" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+
+            <div class="loan-content">
+                <div class="left-section">
+                    <div class="loan-info">
+                        <div class="loan-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h2>Employment Details</h2>
+                        <p>Please provide your employment information</p>
+                    </div>
+
+                    <div class="step-navigation">
+                        <div class="steps">
+                            <div class="step completed">
+                                <div class="step-number">1</div>
+                                <span>Loan Details</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">2</div>
+                                <span>Upload Documents</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">3</div>
+                                <span>Personal Details</span>
+                            </div>
+                            <div class="step active">
+                                <div class="step-number">4</div>
+                                <span>Employment Details</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">5</div>
+                                <span>Financial Information</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">6</div>
+                                <span>Family & Emergency Details</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">7</div>
+                                <span>Declaration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="form-container">
+                        <h3>Employment Details</h3>
+                        <p>Please provide your current employment information</p>
+                        
+                        <form class="employment-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="employmentType">Employment Type*</label>
+                                    <select id="employmentType" name="employmentType" required>
+                                        <option value="">Select employment type</option>
+                                        <option value="salaried">Salaried</option>
+                                        <option value="self-employed">Self Employed</option>
+                                        <option value="business">Business</option>
+                                        <option value="professional">Professional</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="companyName">Company Name*</label>
+                                    <input type="text" id="companyName" name="companyName" placeholder="Enter company name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="designation">Designation*</label>
+                                    <input type="text" id="designation" name="designation" placeholder="Enter designation" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="workExperience">Work Experience (Years)*</label>
+                                    <input type="number" id="workExperience" name="workExperience" placeholder="Enter years" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="currentJobExperience">Current Job Experience (Years)*</label>
+                                    <input type="number" id="currentJobExperience" name="currentJobExperience" placeholder="Enter years" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="monthlyIncome">Monthly Income*</label>
+                                    <input type="number" id="monthlyIncome" name="monthlyIncome" placeholder="Enter monthly income" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="companyAddress">Company Address*</label>
+                                    <textarea id="companyAddress" name="companyAddress" rows="3" placeholder="Enter company address" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="companyPhone">Company Phone*</label>
+                                    <input type="tel" id="companyPhone" name="companyPhone" placeholder="Enter company phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="companyEmail">Company Email</label>
+                                    <input type="email" id="companyEmail" name="companyEmail" placeholder="Enter company email">
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" onclick="goToPersonalDetails()">BACK</button>
+                            <button class="btn btn-primary" onclick="goToFinancialInfo()">
+                                NEXT <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <h4>Summary</h4>
+                        <div class="summary-item">
+                            <span class="label">Loan Amount</span>
+                            <span class="value">₹ 72,207</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Tenure</span>
+                            <span class="value">72 months</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Document uploaded</span>
+                            <span class="value status-success">Successfully</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Full Name</span>
+                            <span class="value">John Mathew</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">D.O.B</span>
+                            <span class="value">12/08/1990</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Employment Type</span>
+                            <span class="value">Salaried</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Financial Information Page -->
+        <div class="loan-page" id="financial-info-page">
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <span>Loan Application</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Financial Information</span>
+                </div>
+                <button class="back-to-dashboard" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+
+            <div class="loan-content">
+                <div class="left-section">
+                    <div class="loan-info">
+                        <div class="loan-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h2>Financial Information</h2>
+                        <p>Please provide your financial details</p>
+                    </div>
+
+                    <div class="step-navigation">
+                        <div class="steps">
+                            <div class="step completed">
+                                <div class="step-number">1</div>
+                                <span>Loan Details</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">2</div>
+                                <span>Upload Documents</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">3</div>
+                                <span>Personal Details</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">4</div>
+                                <span>Employment Details</span>
+                            </div>
+                            <div class="step active">
+                                <div class="step-number">5</div>
+                                <span>Financial Information</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">6</div>
+                                <span>Family & Emergency Details</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">7</div>
+                                <span>Declaration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="form-container">
+                        <h3>Financial Information</h3>
+                        <p>Please provide your financial details for loan assessment</p>
+                        
+                        <form class="financial-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="bankName">Bank Name*</label>
+                                    <input type="text" id="bankName" name="bankName" placeholder="Enter bank name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="accountNumber">Account Number*</label>
+                                    <input type="text" id="accountNumber" name="accountNumber" placeholder="Enter account number" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="ifscCode">IFSC Code*</label>
+                                    <input type="text" id="ifscCode" name="ifscCode" placeholder="Enter IFSC code" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="accountType">Account Type*</label>
+                                    <select id="accountType" name="accountType" required>
+                                        <option value="">Select account type</option>
+                                        <option value="savings">Savings</option>
+                                        <option value="current">Current</option>
+                                        <option value="salary">Salary</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="accountBalance">Current Balance*</label>
+                                    <input type="number" id="accountBalance" name="accountBalance" placeholder="Enter current balance" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="monthlyExpenses">Monthly Expenses*</label>
+                                    <input type="number" id="monthlyExpenses" name="monthlyExpenses" placeholder="Enter monthly expenses" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label>Do you have any existing loans?</label>
+                                    <div class="radio-group">
+                                        <label class="radio-label">
+                                            <input type="radio" name="existingLoans" value="yes">
+                                            <span class="radio-custom"></span>
+                                            Yes
+                                        </label>
+                                        <label class="radio-label">
+                                            <input type="radio" name="existingLoans" value="no" checked>
+                                            <span class="radio-custom"></span>
+                                            No
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row existing-loan-details" style="display: none;">
+                                <div class="form-group">
+                                    <label for="existingLoanAmount">Existing Loan Amount</label>
+                                    <input type="number" id="existingLoanAmount" name="existingLoanAmount" placeholder="Enter loan amount">
+                                </div>
+                                <div class="form-group">
+                                    <label for="existingLoanEmi">Monthly EMI</label>
+                                    <input type="number" id="existingLoanEmi" name="existingLoanEmi" placeholder="Enter monthly EMI">
+                                </div>
+                                <div class="form-group">
+                                    <label for="existingLoanBank">Bank/Institution</label>
+                                    <input type="text" id="existingLoanBank" name="existingLoanBank" placeholder="Enter bank name">
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" onclick="goToEmploymentDetails()">BACK</button>
+                            <button class="btn btn-primary" onclick="goToFamilyDetails()">
+                                NEXT <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <h4>Summary</h4>
+                        <div class="summary-item">
+                            <span class="label">Loan Amount</span>
+                            <span class="value">₹ 72,207</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Tenure</span>
+                            <span class="value">72 months</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Monthly Income</span>
+                            <span class="value">₹ 45,000</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Bank Name</span>
+                            <span class="value">HDFC Bank</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Account Type</span>
+                            <span class="value">Savings</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Family & Emergency Details Page -->
+        <div class="loan-page" id="family-details-page">
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <span>Loan Application</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Family & Emergency Details</span>
+                </div>
+                <button class="back-to-dashboard" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+
+            <div class="loan-content">
+                <div class="left-section">
+                    <div class="loan-info">
+                        <div class="loan-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h2>Family & Emergency Details</h2>
+                        <p>Please provide family and emergency contact information</p>
+                    </div>
+
+                    <div class="step-navigation">
+                        <div class="steps">
+                            <div class="step completed">
+                                <div class="step-number">1</div>
+                                <span>Loan Details</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">2</div>
+                                <span>Upload Documents</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">3</div>
+                                <span>Personal Details</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">4</div>
+                                <span>Employment Details</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">5</div>
+                                <span>Financial Information</span>
+                            </div>
+                            <div class="step active">
+                                <div class="step-number">6</div>
+                                <span>Family & Emergency Details</span>
+                            </div>
+                            <div class="step">
+                                <div class="step-number">7</div>
+                                <span>Declaration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="form-container">
+                        <h3>Family & Emergency Details</h3>
+                        <p>Please provide family and emergency contact information</p>
+                        
+                        <form class="family-form">
+                            <h4>Spouse Details (if married)</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="spouseName">Spouse Name</label>
+                                    <input type="text" id="spouseName" name="spouseName" placeholder="Enter spouse name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="spouseDob">Spouse Date of Birth</label>
+                                    <input type="date" id="spouseDob" name="spouseDob">
+                                </div>
+                                <div class="form-group">
+                                    <label for="spouseOccupation">Spouse Occupation</label>
+                                    <input type="text" id="spouseOccupation" name="spouseOccupation" placeholder="Enter occupation">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="spouseIncome">Spouse Monthly Income</label>
+                                    <input type="number" id="spouseIncome" name="spouseIncome" placeholder="Enter monthly income">
+                                </div>
+                                <div class="form-group">
+                                    <label for="spousePhone">Spouse Phone</label>
+                                    <input type="tel" id="spousePhone" name="spousePhone" placeholder="Enter phone number">
+                                </div>
+                            </div>
+
+                            <h4>Emergency Contact Details</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="emergencyName">Emergency Contact Name*</label>
+                                    <input type="text" id="emergencyName" name="emergencyName" placeholder="Enter contact name" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emergencyRelation">Relationship*</label>
+                                    <select id="emergencyRelation" name="emergencyRelation" required>
+                                        <option value="">Select relationship</option>
+                                        <option value="father">Father</option>
+                                        <option value="mother">Mother</option>
+                                        <option value="spouse">Spouse</option>
+                                        <option value="sibling">Sibling</option>
+                                        <option value="friend">Friend</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="emergencyPhone">Emergency Contact Phone*</label>
+                                    <input type="tel" id="emergencyPhone" name="emergencyPhone" placeholder="Enter phone number" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group full-width">
+                                    <label for="emergencyAddress">Emergency Contact Address*</label>
+                                    <textarea id="emergencyAddress" name="emergencyAddress" rows="3" placeholder="Enter address" required></textarea>
+                                </div>
+                            </div>
+
+                            <h4>Dependents Information</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="numberOfDependents">Number of Dependents</label>
+                                    <input type="number" id="numberOfDependents" name="numberOfDependents" placeholder="Enter number" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label for="dependentsAge">Dependents Age Range</label>
+                                    <input type="text" id="dependentsAge" name="dependentsAge" placeholder="e.g., 5-15 years">
+                                </div>
+                            </div>
+                        </form>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" onclick="goToFinancialInfo()">BACK</button>
+                            <button class="btn btn-primary" onclick="goToDeclaration()">
+                                NEXT <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <h4>Summary</h4>
+                        <div class="summary-item">
+                            <span class="label">Loan Amount</span>
+                            <span class="value">₹ 72,207</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Tenure</span>
+                            <span class="value">72 months</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Emergency Contact</span>
+                            <span class="value">John's Father</span>
+                            <button class="edit-btn"><i class="fas fa-edit"></i> Edit</button>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Relationship</span>
+                            <span class="value">Father</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Contact Phone</span>
+                            <span class="value">+91 98765 43210</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Declaration Page -->
+        <div class="loan-page" id="declaration-page">
+            <div class="page-header">
+                <div class="breadcrumb">
+                    <span>Loan Application</span>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Declaration</span>
+                </div>
+                <button class="back-to-dashboard" onclick="showDashboard()">
+                    <i class="fas fa-arrow-left"></i> Back to Dashboard
+                </button>
+            </div>
+
+            <div class="loan-content">
+                <div class="left-section">
+                    <div class="loan-info">
+                        <div class="loan-icon">
+                            <i class="fas fa-file-signature"></i>
+                        </div>
+                        <h2>Declaration</h2>
+                        <p>Please review and confirm your application</p>
+                    </div>
+
+                    <div class="step-navigation">
+                        <div class="steps">
+                            <div class="step completed">
+                                <div class="step-number">1</div>
+                                <span>Loan Details</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">2</div>
+                                <span>Upload Documents</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">3</div>
+                                <span>Personal Details</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">4</div>
+                                <span>Employment Details</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">5</div>
+                                <span>Financial Information</span>
+                            </div>
+                            <div class="step completed">
+                                <div class="step-number">6</div>
+                                <span>Family & Emergency Details</span>
+                            </div>
+                            <div class="step active">
+                                <div class="step-number">7</div>
+                                <span>Declaration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="right-section">
+                    <div class="form-container">
+                        <h3>Declaration</h3>
+                        <p>Please read and accept the terms and conditions</p>
+                        
+                        <div class="declaration-content">
+                            <div class="declaration-text">
+                                <h4>Terms and Conditions</h4>
+                                <div class="terms-content">
+                                    <p>I hereby declare that the information provided in this loan application is true, complete, and accurate to the best of my knowledge. I understand that:</p>
+                                    <ul>
+                                        <li>Any false or misleading information may result in the rejection of my loan application or cancellation of the loan if already approved.</li>
+                                        <li>The bank reserves the right to verify all information provided and may request additional documentation.</li>
+                                        <li>I authorize the bank to conduct credit checks and verify my employment and income details.</li>
+                                        <li>I agree to the terms and conditions of the loan as specified in the loan agreement.</li>
+                                        <li>I understand the interest rates, fees, and charges associated with this loan.</li>
+                                        <li>I agree to repay the loan amount along with interest as per the agreed schedule.</li>
+                                        <li>I understand that failure to repay may result in legal action and impact my credit score.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="consent-section">
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="termsAccept" name="termsAccept" required>
+                                        <span class="checkbox-custom"></span>
+                                        I have read and accept the terms and conditions
+                                    </label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="dataConsent" name="dataConsent" required>
+                                        <span class="checkbox-custom"></span>
+                                        I consent to the processing of my personal data for loan processing
+                                    </label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="creditCheck" name="creditCheck" required>
+                                        <span class="checkbox-custom"></span>
+                                        I authorize credit checks and verification of provided information
+                                    </label>
+                                </div>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="marketingConsent" name="marketingConsent">
+                                        <span class="checkbox-custom"></span>
+                                        I agree to receive marketing communications (optional)
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="signature-section">
+                                <div class="form-group">
+                                    <label for="digitalSignature">Digital Signature*</label>
+                                    <input type="text" id="digitalSignature" name="digitalSignature" placeholder="Type your full name as digital signature" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="signatureDate">Date*</label>
+                                    <input type="date" id="signatureDate" name="signatureDate" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn btn-secondary" onclick="goToFamilyDetails()">BACK</button>
+                            <button class="btn btn-primary btn-submit" onclick="submitLoanApplication()">
+                                SUBMIT APPLICATION <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="summary-section">
+                    <div class="summary-card">
+                        <h4>Application Summary</h4>
+                        <div class="summary-item">
+                            <span class="label">Loan Amount</span>
+                            <span class="value">₹ 72,207</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Tenure</span>
+                            <span class="value">72 months</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Monthly EMI</span>
+                            <span class="value">₹ 1,203</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Interest Rate</span>
+                            <span class="value">12.5% p.a.</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Processing Fee</span>
+                            <span class="value">₹ 1,500</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="label">Application Status</span>
+                            <span class="value status-pending">Ready to Submit</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/loan-application.js"></script>
+</body>
+</html>
