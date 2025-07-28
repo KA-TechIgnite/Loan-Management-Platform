@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Accelerator</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/pages.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page active">
+        <div class="login-container">
+            <div class="login-left">
+                <div class="welcome-section">
+                    <div class="logo">
+                        <div class="logo-icon">L</div>
+                    </div>
+                    <h1>Welcome to <span class="brand">Loan Accelerator</span></h1>
+                    <p>Login to access your account</p>
+                    
+                    <div class="dashboard-preview">
+                        <div class="preview-mockup">
+                            <div class="mockup-header"></div>
+                            <div class="mockup-content">
+                                <div class="mockup-chart"></div>
+                                <div class="mockup-table"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="login-right">
+                <div class="login-form-container">
+                    <div class="login-header">
+                        <div class="logo-small">
+                            <div class="logo-icon">L</div>
+                            <span>LOAN ACCELERATOR</span>
+                        </div>
+                    </div>
+                    
+                    <div class="login-form-section">
+                        <h2>Sign In</h2>
+                        <p>Please select your role</p>
+                        
+                        <div class="role-selector">
+                            <button class="role-option" data-role="customer">
+                                <i class="fas fa-user"></i>
+                                <span>Customer</span>
+                            </button>
+                            <button class="role-option" data-role="manager">
+                                <i class="fas fa-users"></i>
+                                <span>Manager</span>
+                            </button>
+                        </div>
+                        
+                        <form id="loginForm" class="login-form">
+                            <div class="form-group">
+                                <label for="email">Email ID</label>
+                                <input type="email" id="email" name="email" placeholder="name@gmail.com" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" name="password" placeholder="At least 8 characters" required>
+                            </div>
+                            
+                            <div class="forgot-password">
+                                <a href="#">Forgot your password?</a>
+                            </div>
+                            
+                            <button type="submit" class="sign-in-btn" disabled>
+                                SIGN IN
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboardPage" class="page">
+        <header class="dashboard-header">
+            <div class="header-left">
+                <div class="logo-small">
+                    <div class="logo-icon">L</div>
+                    <span>LOAN ACCELERATOR</span>
+                </div>
+            </div>
+            <div class="header-center">
+                <div class="search-bar">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search">
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="header-icons">
+                    <i class="fas fa-question-circle"></i>
+                    <div class="notification-icon">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">1</span>
+                    </div>
+                    <div class="user-profile">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0Mjg1RjQiLz4KPHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEyIDEyQzE0LjIwOTEgMTIgMTYgMTAuMjA5MSAxNiA4QzE2IDUuNzkwODYgMTQuMjA5MSA0IDEyIDRDOS43OTA4NiA0IDggNS43OTA4NiA4IDhDOCAxMC4yMDkxIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMTRDOC42ODYyOSAxNCA2IDE2LjY4NjMgNiAyMFYyMkgxOFYyMEMxOCAxNi42ODYzIDE1LjMxMzcgMTQgMTIgMTRaIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4KPC9zdmc+" alt="User">
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="dashboard-content">
+            <aside class="sidebar">
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li class="nav-item active">
+                            <i class="fas fa-tachometer-alt"></i>
+                            <span>Dashboard</span>
+                        </li>
+                        <li class="nav-item" onclick="navigateToLoanApplication()">
+                            <i class="fas fa-file-alt"></i>
+                            <span>Apply Loan</span>
+                        </li>
+                        <li class="nav-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>View Status</span>
+                        </li>
+                        <li class="nav-item">
+                            <i class="fas fa-calculator"></i>
+                            <span>EMI Calculator</span>
+                        </li>
+                        <li class="nav-item">
+                            <i class="fas fa-question"></i>
+                            <span>FAQ's</span>
+                        </li>
+                        <li class="nav-item">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="sidebar-footer">
+                    <button class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <div class="dashboard-grid">
+                    <div class="welcome-section">
+                        <h2>Hi <span id="userName">John Mathew</span></h2>
+                        <p>You haven't applied for any loan yet!</p>
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="left-column">
+                            <!-- Loan Calculator Section -->
+                            <div class="card loan-calculator">
+                                <h3>What Loans Are You Looking For?</h3>
+                                <p>What's more, if you are eligible for a pre-approved offer, you can get instant loan sanction with no documentation. Added benefits include attractive interest rate, low EMI and simplified loan application and disbursement process.</p>
+                                
+                                <a href="#" class="eligibility-link">Click here to check your loan eligibility status</a>
+                                
+                                <button class="apply-btn" onclick="navigateToLoanApplication()">APPLY NOW</button>
+                                
+                                <div class="emi-calculator">
+                                    <h4>EMI Calculator</h4>
+                                    
+                                    <div class="calculator-inputs">
+                                        <div class="input-row">
+                                            <div class="input-group">
+                                                <label>Loan Type</label>
+                                                <select id="loanType">
+                                                    <option>Personal Loan</option>
+                                                    <option>Car Loan</option>
+                                                    <option>Home Loan</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="input-group">
+                                                <label>Amount</label>
+                                                <input type="number" id="loanAmount" value="300000">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="input-row">
+                                            <div class="input-group">
+                                                <label>Tenure</label>
+                                                <select id="loanTenure">
+                                                    <option>2years</option>
+                                                    <option>3years</option>
+                                                    <option>5years</option>
+                                                </select>
+                                            </div>
+                                            
+                                            <div class="interest-rate">
+                                                <span id="interestRate">7.21%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="calculation-result">
+                                        <div class="chart-container">
+                                            <canvas id="emiChart" width="200" height="200"></canvas>
+                                            <div class="chart-center">
+                                                <div class="emi-amount">
+                                                    <span class="currency">₹</span>
+                                                    <span class="amount" id="emiAmount">5,207</span>
+                                                    <span class="period">/month</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="amounts">
+                                            <div class="amount-item">
+                                                <span class="label">Principal Amount</span>
+                                                <span class="value" id="principalAmount">₹ 72,207</span>
+                                            </div>
+                                            <div class="amount-item">
+                                                <span class="label">Interest Amount</span>
+                                                <span class="value" id="interestAmount">₹ 66,207</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Application Status Section -->
+                            <div class="card application-status">
+                                <h3>Application Status</h3>
+                                
+                                <div class="status-table">
+                                    <div class="table-header">
+                                        <div class="col">Loan Type</div>
+                                        <div class="col">Application ID</div>
+                                        <div class="col">Loan Amount</div>
+                                        <div class="col">Interest</div>
+                                        <div class="col">Start Date</div>
+                                        <div class="col">End Date</div>
+                                        <div class="col">Loan Tenure</div>
+                                        <div class="col">Status</div>
+                                    </div>
+                                    
+                                    <div class="table-body" id="applicationTableBody">
+                                        <!-- Dynamic content will be inserted here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="right-column">
+                            <!-- Eligibility Score Section -->
+                            <div class="card eligibility-score">
+                                <div class="score-header">
+                                    <h3>Eligibility Score</h3>
+                                    <a href="#" class="generate-report">Generate Report</a>
+                                </div>
+                                
+                                <div class="score-display">
+                                    <div class="gauge-container">
+                                        <canvas id="scoreGauge" width="200" height="200"></canvas>
+                                        <div class="score-center">
+                                            <div class="score-value" id="scoreValue">750</div>
+                                            <div class="score-date">01-16-2022</div>
+                                            <div class="score-status">Your Credit Score is Excellent</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Application Profile Section -->
+                            <div class="card application-profile">
+                                <h3>My Application Profile</h3>
+                                <p class="profile-subtitle">Loan Repayment Status</p>
+                                
+                                <div class="profile-stats">
+                                    <div class="stat-item">
+                                        <div class="stat-chart">
+                                            <canvas id="profileChart1" width="80" height="80"></canvas>
+                                            <div class="stat-percentage">20%</div>
+                                        </div>
+                                        <div class="stat-info">
+                                            <div class="stat-label">Car Loan</div>
+                                            <div class="stat-amount">$21,549</div>
+                                            <div class="stat-detail">4 Years are remaining in pay 100% loan</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="stat-item">
+                                        <div class="stat-chart">
+                                            <canvas id="profileChart2" width="80" height="80"></canvas>
+                                            <div class="stat-percentage">60%</div>
+                                        </div>
+                                        <div class="stat-info">
+                                            <div class="stat-label">Personal Loan</div>
+                                            <div class="stat-amount">$9,540</div>
+                                            <div class="stat-detail">4 Years are remaining in pay 100% loan</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <a href="#" class="view-report">Click here to view the complete report</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/api.js"></script>
+</body>
+</html>
