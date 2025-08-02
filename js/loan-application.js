@@ -276,11 +276,9 @@ function goToEmploymentDetails() {
         return;
     }
     
-    // If we're on address-info, validate only address info fields and proceed
-    if (loanApplicationState.currentSubStep === 'address-info') {
-        if (!validateAddressInfoOnly()) {
-            return;
-        }
+    // If we're on address-info, validate all personal details and proceed
+    if (!validatePersonalDetails()) {
+        return;
     }
     
     showPage('employment-details-page');
@@ -464,40 +462,6 @@ function validatePersonalInfoOnly() {
             field.focus();
             return false;
         }
-    }
-    
-    return true;
-}
-
-function validateAddressInfoOnly() {
-    const requiredFields = {
-        'presentAddress': 'Present Address',
-        'permanentAddress': 'Permanent Address',
-        'emailId': 'Email ID',
-        'mobile1': 'Mobile Number'
-    };
-    
-    for (let [fieldId, fieldName] of Object.entries(requiredFields)) {
-        const field = document.getElementById(fieldId);
-        if (field && !field.value.trim()) {
-            showMessage(`Please fill in ${fieldName}`, 'error');
-            field.focus();
-            return false;
-        }
-    }
-    
-    // Validate email format
-    const email = document.getElementById('emailId')?.value;
-    if (email && !isValidEmail(email)) {
-        showMessage('Please enter a valid email address', 'error');
-        return false;
-    }
-    
-    // Validate mobile number
-    const mobile = document.getElementById('mobile1')?.value;
-    if (mobile && !isValidMobile(mobile)) {
-        showMessage('Please enter a valid mobile number', 'error');
-        return false;
     }
     
     return true;
