@@ -1,32 +1,185 @@
+Loan Analytics Page Files
+loan-analytics.html
+html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Analytics</title>
-    <link rel="stylesheet" href="styles/loan-products.css">
-    <script src="js/loan-products.js"></script>
+    <title>Loan Analytics - Loan Accelerator</title>
+    <link rel="stylesheet" href="styles/loan Analytics.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
 </head>
 <body>
-    <div class="sidebar"> <!-- assume sidebar from base.html --> </div>
-    <div class="main-content">
-        <header class="topbar">Loan Analytics</header>
-
-        <section class="cards-container">
-            <div class="card">Total Loans: <span>2,340</span></div>
-            <div class="card">Default Rate: <span>4.2%</span></div>
-            <div class="card">New Applicants: <span>460</span></div>
-            <div class="card">Active Users: <span>1,287</span></div>
-        </section>
-
-        <section class="chart-container">
-            <canvas id="lineChart"></canvas>
-        </section>
-
-        <section class="chart-container">
-            <canvas id="doughnutChart"></canvas>
-        </section>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-chart-line"></i> <span class="sidebar-text">LOAN ACCELERATOR</span></h3>
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="back-arrow">
+            <a href="manager-dashboard.html"><i class="fas fa-arrow-left"></i></a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="manager-dashboard.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span class="sidebar-text">Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="sidebar-text">Loan Origination</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item dropdown active open">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-boxes"></i>
+                        <span class="sidebar-text">Loan Products</span>
+                        <i class="fas fa-caret-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown">
+                        <li><a href="loan-analytics.html" class="active">Loan Analytics</a></li>
+                        <li><a href="loan-centric.html">Loan Centric View</a></li>
+                     
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span class="sidebar-text">Customer Scape</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span class="sidebar-text">Applied Loans</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item logout">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="sidebar-text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-   <script src="js/loan-products.js"></script>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Header -->
+        <header class="header">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="header-right">
+                <div class="notification">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">1</span>
+                </div>
+                <div class="user-avatar"></div>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="breadcrumb">Loan Accelerator | Loan Analytics</div>
+            <h1 class="page-title">Loan Analytics</h1>
+
+            <div class="dashboard-grid">
+                <!-- Loan Type Distribution -->
+                <div class="chart-container">
+                    <h3 class="chart-title">Loan Type Distribution</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="loanTypeChart"></canvas>
+                    </div>
+                    <div class="custom-legend" id="loanTypeLegend"></div>
+                </div>
+
+                <!-- Loan Issued State Distribution -->
+                <div class="chart-container">
+                    <h3 class="chart-title">Loan Issued State Distribution</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="stateChart"></canvas>
+                        <div class="state-legend">
+                            <div class="state-legend-item">
+                                <div class="state-legend-color" style="background: #4f7cff;"></div>
+                                <span>CA (3.80%)</span>
+                            </div>
+                            <div class="state-legend-item">
+                                <div class="state-legend-color" style="background: #7b68ee;"></div>
+                                <span>NY (25.60%)</span>
+                            </div>
+                            <div class="state-legend-item">
+                                <div class="state-legend-color" style="background: #ff6b6b;"></div>
+                                <span>TX (19.67%)</span>
+                            </div>
+                            <div class="state-legend-item">
+                                <div class="state-legend-color" style="background: #4ecdc4;"></div>
+                                <span>FL (30%)</span>
+                            </div>
+                            <div class="state-legend-item">
+                                <div class="state-legend-color" style="background: #45b7d1;"></div>
+                                <span>WA (15%)</span>
+                            </div>
+                            <div class="state-legend-item">
+                                <div class="state-legend-color" style="background: #96ceb4;"></div>
+                                <span>IL (40%)</span>
+                            </div>
+                            <div class="state-legend-item">
+                                <div class="state-legend-color" style="background: #feca57;"></div>
+                                <span>PA (36.70%)</span>
+                            </div>
+                            <div class="state-legend-item">
+                                <div class="state-legend-color" style="background: #ff9ff3;"></div>
+                                <span>OH (38.9%)</span>
+                            </div>
+                            <div class="state-legend-item">
+                                <div class="state-legend-color" style="background: #54a0ff;"></div>
+                                <span>GA (20.60%)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bottom-grid">
+                <!-- Monthly Loan Distribution 2020 -->
+                <div class="chart-container">
+                    <h3 class="chart-title">Monthly Loan Distribution 2020</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Loan Engagement on January 2020 -->
+                <div class="chart-container">
+                    <h3 class="chart-title">Loan Engagement on January 2020</h3>
+                    <div class="chart-wrapper">
+                        <canvas id="engagementChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/loan Analytics.js"></script>
 </body>
 </html>
+

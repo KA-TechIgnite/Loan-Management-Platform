@@ -3,30 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Centric View</title>
-    <link rel="stylesheet" href="styles/loan-products.css">
-    <script src="js/loan-products.js"></script>
+    <title>Loan Centric View - Loan Accelerator</title>
+    <link rel="stylesheet" href="styles/loan centric.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="sidebar"> <!-- assume sidebar from base.html --> </div>
-    <div class="main-content">
-        <header class="topbar">Loan Centric View</header>
-
-        <section class="cards-container">
-            <div class="card">Pending Approvals: <span>128</span></div>
-            <div class="card">High Risk Loans: <span>39</span></div>
-            <div class="card">Pre-Approved: <span>208</span></div>
-            <div class="card">Rejected: <span>74</span></div>
-        </section>
-
-        <section class="chart-container">
-            <canvas id="barChart"></canvas>
-        </section>
-
-        <section class="chart-container">
-            <canvas id="pieChart"></canvas>
-        </section>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3><i class="fas fa-chart-line"></i> <span class="sidebar-text">LOAN ACCELERATOR</span></h3>
+            <button class="toggle-btn" id="toggleBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="back-arrow">
+            <a href="manager-dashboard.html"><i class="fas fa-arrow-left"></i></a>
+        </div>
+        
+        <nav class="sidebar-nav">
+            <ul class="nav-list">
+                <li class="nav-item">
+                    <a href="manager-dashboard.html" class="nav-link">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span class="sidebar-text">Dashboard</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-file-alt"></i>
+                        <span class="sidebar-text">Loan Origination</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item dropdown active open">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-boxes"></i>
+                        <span class="sidebar-text">Loan Products</span>
+                        <i class="fas fa-caret-down dropdown-icon"></i>
+                    </a>
+                    <ul class="dropdown">
+                        <li><a href="loan-analytics.html">Loan Analytics</a></li>
+                        <li><a href="loan-centric.html" class="active">Loan Centric View</a></li>
+                        <li><a href="#">Superset Dashboard</a></li>
+                    </ul>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-users"></i>
+                        <span class="sidebar-text">Customer Scape</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-clipboard-list"></i>
+                        <span class="sidebar-text">Applied Loans</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item logout">
+                    <a href="#" class="nav-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span class="sidebar-text">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
-    <script src="js/loan-products.js"></script>
+
+    <!-- Main Content -->
+    <div class="main-content" id="mainContent">
+        <!-- Header -->
+        <header class="header">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+            <div class="header-right">
+                <div class="notification">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="notification">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">1</span>
+                </div>
+                <div class="user-avatar"></div>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="breadcrumb">Loan Accelerator | Loan Centric View</div>
+            <h1 class="page-title">Select Loan</h1>
+
+            <!-- Loan Cards Grid -->
+            <div class="loans-grid">
+                <!-- Medical Loan -->
+                <div class="loan-card">
+                    <div class="loan-icon medical">
+                        <i class="fas fa-plus-square"></i>
+                    </div>
+                    <div class="loan-content">
+                        <h3 class="loan-title">Medical Loan</h3>
+                        <p class="success-rate">Success Rate 34.5%</p>
+                    </div>
+                    <button class="view-details-btn">
+                        View Details
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Education Loan -->
+                <div class="loan-card">
+                    <div class="loan-icon education">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="loan-content">
+                        <h3 class="loan-title">Education Loan</h3>
+                        <p class="success-rate">Success Rate 14.5%</p>
+                    </div>
+                    <button class="view-details-btn">
+                        View Details
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Debt Consolidation Loan -->
+                <div class="loan-card">
+                    <div class="loan-icon debt">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="loan-content">
+                        <h3 class="loan-title">Debt Consolidation Loan</h3>
+                        <p class="success-rate">Success Rate 24.5%</p>
+                    </div>
+                    <button class="view-details-btn">
+                        View Details
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Small Business Loan -->
+                <div class="loan-card">
+                    <div class="loan-icon business">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="loan-content">
+                        <h3 class="loan-title">Small Business Loan</h3>
+                        <p class="success-rate">Success Rate 34.5%</p>
+                    </div>
+                    <button class="view-details-btn">
+                        View Details
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Credit Card Loan -->
+                <div class="loan-card">
+                    <div class="loan-icon credit">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <div class="loan-content">
+                        <h3 class="loan-title">Credit Card Loan</h3>
+                        <p class="success-rate">Success Rate 34.5%</p>
+                    </div>
+                    <button class="view-details-btn">
+                        View Details
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Vehicle Loan -->
+                <div class="loan-card">
+                    <div class="loan-icon vehicle">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="loan-content">
+                        <h3 class="loan-title">Vehicle Loan</h3>
+                        <p class="success-rate">Success Rate 34.5%</p>
+                    </div>
+                    <button class="view-details-btn">
+                        View Details
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Consumer Loan -->
+                <div class="loan-card">
+                    <div class="loan-icon consumer">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="loan-content">
+                        <h3 class="loan-title">Consumer Loan</h3>
+                        <p class="success-rate">Success Rate 42.5%</p>
+                    </div>
+                    <button class="view-details-btn">
+                        View Details
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Personal Loan -->
+                <div class="loan-card">
+                    <div class="loan-icon personal">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="loan-content">
+                        <h3 class="loan-title">Personal Loan</h3>
+                        <p class="success-rate">Success Rate 32.5%</p>
+                    </div>
+                    <button class="view-details-btn">
+                        View Details
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+
+                <!-- Housing Loan -->
+                <div class="loan-card">
+                    <div class="loan-icon housing">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="loan-content">
+                        <h3 class="loan-title">Housing Loan</h3>
+                        <p class="success-rate">Success Rate 52.5%</p>
+                    </div>
+                    <button class="view-details-btn">
+                        View Details
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/loan centric.js"></script>
 </body>
 </html>
+
