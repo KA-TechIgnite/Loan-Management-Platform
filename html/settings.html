@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application - Loan Accelerator</title>
+    <link rel="stylesheet" href="../styles/faq.css" />
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+    <link rel="stylesheet" href="../styles/loan-application.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../styles/settings.css" />
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="app-header" style="position: sticky; top: 0; z-index: 1000; background-color: white;" >
+        <div class="header-left">
+            <div class="logo">
+                <i class="fas fa-clock"></i>
+                <span>LOAN ACCELERATOR</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-icons">
+                <div class="notification-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">1</span>
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM0Mjg1RjQiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik04IDhDMTAuMjA5MSA4IDEyIDYuMjA5MTQgMTIgNEMxMiAxLjc5MDg2IDEwLjIwOTEgMCA4IDBDNS43OTA4NiAwIDQgMS43OTA4NiA0IDRDNCA2LjIwOTE0IDUuNzkwODYgOCA4IDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNOCAxMEMzLjU4MTcyIDEwIDAgMTMuNTgxNyAwIDE4SDE2QzE2IDEzLjU4MTcgMTIuNDE4MyAxMCA4IDEwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo=" alt="User">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" onclick="showDashboard()"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li class="active"><a href="#" onclick="showLoanApplication()"><i class="fas fa-file-alt"></i> Apply Loan</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> EMI Calculator</a></li>
+                <li><a href="#"><i class="fas fa-tags"></i> FAQs</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+        <main class="main-content">
+            
+
+            <div class="content">
+                <h1 class="page-title">Settings</h1>
+                
+                <div class="settings-grid">
+                    <!-- Profile Settings -->
+                    <div class="settings-card">
+                        <h2 class="card-title">👤 Profile Settings</h2>
+                        
+                        <div class="success-message" id="profileSuccess">
+                            Profile updated successfully!
+                        </div>
+                        
+                        <div class="profile-avatar-section">
+                            <div class="profile-avatar-large">P</div>
+                            <button class="avatar-upload-btn">Change Photo</button>
+                        </div>
+                        
+                        <form id="profileForm">
+                            <div class="form-group">
+                                <label class="form-label">Full Name</label>
+                                <input type="text" class="form-input" id="fullName" value="Pallavi" disabled>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Email Address</label>
+                                <input type="email" class="form-input" id="email" value="pallavi@example.com" disabled>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Phone Number</label>
+                                <input type="tel" class="form-input" id="phone" value="+91 98765 43210" disabled>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="form-label">Password</label>
+                                <input type="password" class="form-input" id="password" value="••••••••" disabled>
+                            </div>
+                            
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary" id="editBtn">Edit Profile</button>
+                                <button type="button" class="btn btn-success" id="saveBtn" style="display: none;">Save Changes</button>
+                                <button type="button" class="btn btn-secondary" id="cancelBtn" style="display: none;">Cancel</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Notification Preferences -->
+                    <div class="settings-card">
+                        <h2 class="card-title">🔔 Notification Preferences</h2>
+                        
+                        <div class="success-message" id="notificationSuccess">
+                            Notification preferences updated!
+                        </div>
+                        
+                        <div class="toggle-container">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Email Notifications</div>
+                                <div class="toggle-description">Receive updates about your loans via email</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" id="emailNotifications" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-container">
+                            <div class="toggle-info">
+                                <div class="toggle-title">SMS Notifications</div>
+                                <div class="toggle-description">Get SMS alerts for EMI due dates and approvals</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" id="smsNotifications" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-container">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Push Notifications</div>
+                                <div class="toggle-description">Browser notifications for real-time updates</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" id="pushNotifications">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-container">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Marketing Communications</div>
+                                <div class="toggle-description">Receive promotional offers and news</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" id="marketingNotifications">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Security Settings -->
+                    <div class="settings-card">
+                        <h2 class="card-title">🔒 Security Settings</h2>
+                        
+                        <div class="toggle-container">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Two-Factor Authentication</div>
+                                <div class="toggle-description">Add an extra layer of security to your account</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" id="twoFactorAuth">
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="toggle-container">
+                            <div class="toggle-info">
+                                <div class="toggle-title">Login Alerts</div>
+                                <div class="toggle-description">Get notified when someone logs into your account</div>
+                            </div>
+                            <label class="toggle-switch">
+                                <input type="checkbox" class="toggle-input" id="loginAlerts" checked>
+                                <span class="toggle-slider"></span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-group" style="margin-top: 20px;">
+                            <button type="button" class="btn btn-primary">Change Password</button>
+                        </div>
+                    </div>
+
+                    <!-- Account Settings -->
+                    <div class="settings-card">
+                        <h2 class="card-title">⚙️ Account Settings</h2>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Language</label>
+                            <select class="form-input" id="language">
+                                <option value="en">English</option>
+                                <option value="hi">Hindi</option>
+                                <option value="mr">Marathi</option>
+                                <option value="ta">Tamil</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Currency</label>
+                            <select class="form-input" id="currency">
+                                <option value="inr" selected>INR (₹)</option>
+                                <option value="usd">USD ($)</option>
+                                <option value="eur">EUR (€)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Date Format</label>
+                            <select class="form-input" id="dateFormat">
+                                <option value="dd-mm-yyyy" selected>DD-MM-YYYY</option>
+                                <option value="mm-dd-yyyy">MM-DD-YYYY</option>
+                                <option value="yyyy-mm-dd">YYYY-MM-DD</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" id="saveAccountSettings">Save Settings</button>
+                        </div>
+                        
+                        <hr style="margin: 25px 0; border: none; border-top: 1px solid #eee;">
+                        
+                        <div class="form-group">
+                            <button type="button" class="btn" style="background-color: #dc3545; color: white;">Delete Account</button>
+                            <p style="font-size: 12px; color: #666; margin-top: 8px;">
+                                This action cannot be undone. All your data will be permanently deleted.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+    
+
+    
+    <script src="../js/settings.js"></script>
+</body>
+</html>
