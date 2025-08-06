@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Application - Loan Accelerator</title>
+    <link rel="stylesheet" href="../styles/faq.css" />
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/components.css">
+    <link rel="stylesheet" href="../styles/pages.css">
+    <link rel="stylesheet" href="../styles/loan-application.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="app-header" style="position: sticky; top: 0; z-index: 1000; background-color: white;" >
+        <div class="header-left">
+            <div class="logo">
+                <i class="fas fa-clock"></i>
+                <span>LOAN ACCELERATOR</span>
+            </div>
+        </div>
+        <div class="header-center">
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search">
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-icons">
+                <div class="notification-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <div class="notification-icon">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">1</span>
+                </div>
+                <div class="user-profile">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM0Mjg1RjQiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik04IDhDMTAuMjA5MSA4IDEyIDYuMjA5MTQgMTIgNEMxMiAxLjc5MDg2IDEwLjIwOTEgMCA4IDBDNS43OTA4NiAwIDQgMS43OTA4NiA0IDRDNCA2LjIwOTE0IDUuNzkwODYgOCA4IDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNOCAxMEMzLjU4MTcyIDEwIDAgMTMuNTgxNyAwIDE4SDE2QzE2IDEzLjU4MTcgMTIuNDE4MyAxMCA4IDEwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo=" alt="User">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="#" onclick="showDashboard()"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li class="active"><a href="#" onclick="showLoanApplication()"><i class="fas fa-file-alt"></i> Apply Loan</a></li>
+                <li><a href="#"><i class="fas fa-calculator"></i> EMI Calculator</a></li>
+                <li><a href="#"><i class="fas fa-tags"></i> FAQs</a></li>
+                <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="logout-btn" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                
+            </header>
+
+            <div class="content">
+                <h1 class="page-title">Frequently Asked Questions</h1>
+                
+                <div class="faq-container">
+                    <div class="faq-category">General Questions</div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What is the Loan Accelerator platform?
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Loan Accelerator is a comprehensive loan management system that helps you apply for loans, track your application status, calculate EMIs, and manage your loan portfolio all in one place.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How do I check my eligibility for a loan?
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>You can check your loan eligibility by clicking on the "Eligibility Score" section on your dashboard. Our system will analyze your credit score, income, and other factors to determine your eligibility.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-category">Loan Application</div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            What documents do I need to apply for a loan?
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>You'll need: Valid ID proof, Address proof, Income statements (salary slips/bank statements), Employment verification, and any collateral documents if applicable.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How long does the loan approval process take?
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Pre-approved loans can be sanctioned instantly with no documentation. Regular loan applications typically take 2-7 business days for approval, depending on the loan type and documentation verification.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-category">EMI & Repayment</div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How is my EMI calculated?
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>EMI is calculated using the formula: EMI = [P x R x (1+R)^N] / [(1+R)^N-1], where P is principal, R is monthly interest rate, and N is tenure in months. Use our EMI Calculator for instant calculations.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Can I prepay my loan?
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Yes, you can make partial or full prepayments. Some loans may have prepayment charges. Check your loan terms or contact support for specific details about your loan.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-category">Account & Support</div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            How do I update my contact information?
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Go to Settings from the sidebar menu, where you can update your name, email, phone number, and other profile information. Don't forget to save your changes.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            Who can I contact for support?
+                            <span class="faq-icon">▼</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>You can reach our customer support team at support@loanaccelerator.com or call our helpline at 1800-XXX-XXXX. We're available 24/7 to assist you with any queries.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    
+    <script src="../js/faq.js"></script>
+</body>
+</html>
