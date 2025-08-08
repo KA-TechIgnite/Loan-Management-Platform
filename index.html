@@ -1,111 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>LMP</title>
-    <link rel="stylesheet" href="styles/main.css" />
-    <link rel="stylesheet" href="styles/components.css" />
-    <link rel="stylesheet" href="styles/pages.css" />
-    <link rel="stylesheet" href="styles/enhanced-components.css" />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  </head>
-  <body>
-    <!-- Login Page -->
-    <div id="loginPage" class="page active">
-      <div class="login-container">
-        <div class="login-left">
-          <div class="welcome-section">
-            <div class="logo">
-              <div class="logo-icon">L</div>
-            </div>
-            <h1>Welcome to <span class="brand">Loan Accelerator</span></h1>
-            <p>Login to access your account</p>
-
-            <div class="dashboard-preview">
-              <div class="preview-mockup">
-                <div class="mockup-header"></div>
-                <div class="mockup-content">
-                  <div class="mockup-chart"></div>
-                  <div class="mockup-table"></div>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Accelerator - Welcome</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Section - Welcome and Dashboard Preview -->
+        <div class="welcome-section">
+            <div class="welcome-content">
+                <div class="logo-section">
+                    <div class="logo">
+                        <span>L</span>
+                    </div>
+                    <h1>Welcome to Loan Accelerator</h1>
+                    <p>Login to access your account</p>
                 </div>
-              </div>
+                
+                <div class="dashboard-preview">
+                    <div class="dashboard-mockup">
+                        <!-- Dashboard Sidebar -->
+                        <div class="dashboard-sidebar">
+                            <div class="sidebar-logo">LOAN ACCELERATOR</div>
+                            <nav class="sidebar-nav">
+                                <a href="#" class="nav-item active">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                    <span>Dashboard</span>
+                                </a>
+                                <a href="#" class="nav-item">
+                                    <i class="fas fa-file-alt"></i>
+                                    <span>Apply Loan</span>
+                                </a>
+                                <a href="#" class="nav-item">
+                                    <i class="fas fa-list"></i>
+                                    <span>My Applications</span>
+                                </a>
+                                <a href="#" class="nav-item">
+                                    <i class="fas fa-calculator"></i>
+                                    <span>EMI Calculator</span>
+                                </a>
+                                <a href="#" class="nav-item">
+                                    <i class="fas fa-cog"></i>
+                                    <span>Settings</span>
+                                </a>
+                                <a href="#" class="nav-item">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span>Logout</span>
+                                </a>
+                            </nav>
+                        </div>
+                        
+                        <!-- Dashboard Main Content -->
+                        <div class="dashboard-main">
+                            <div class="dashboard-header">
+                                <div class="search-bar">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" placeholder="Q Search">
+                                </div>
+                                <div class="header-icons">
+                                    <i class="fas fa-user"></i>
+                                    <i class="fas fa-bell"></i>
+                                    <i class="fas fa-cog"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="dashboard-content">
+                                <div class="welcome-message">
+                                    <h2>Hi John Mathew</h2>
+                                    <p>You haven't applied for any loan yet!</p>
+                                </div>
+                                
+                                <div class="loan-application-section">
+                                    <h3>What Loans Are You Looking For?</h3>
+                                    <p>Check your loan eligibility and apply for the best rates</p>
+                                    <a href="#" class="eligibility-link">Click here to check your loan eligibility</a>
+                                    <button class="apply-btn">APPLY NOW</button>
+                                </div>
+                                
+                                <div class="emi-calculator">
+                                    <h3>EMI Calculator</h3>
+                                    <div class="calculator-form">
+                                        <select>
+                                            <option>Personal Loan</option>
+                                        </select>
+                                        <input type="number" placeholder="Loan Amount" value="50000">
+                                        <input type="number" placeholder="Interest Rate" value="12">
+                                        <input type="number" placeholder="Tenure" value="10">
+                                    </div>
+                                    <div class="emi-result">
+                                        <div class="emi-amount">
+                                            <span class="amount">₹5,207</span>
+                                            <span class="period">/month</span>
+                                        </div>
+                                        <div class="total-payable">
+                                            <span>Total Payable: ₹60,280</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="eligibility-score">
+                                    <h3>Eligibility Score</h3>
+                                    <div class="score-gauge">
+                                        <div class="gauge-circle">
+                                            <span class="score">750</span>
+                                        </div>
+                                        <p>Your Credit Score is Excellent</p>
+                                        <button class="report-btn">Generate Report</button>
+                                    </div>
+                                </div>
+                                
+                                <div class="application-status">
+                                    <h3>Application Status</h3>
+                                    <div class="status-table">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Loan Type</th>
+                                                    <th>Application ID</th>
+                                                    <th>Loan Amount</th>
+                                                    <th>Interest</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Loan Tenure</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Personal Loan</td>
+                                                    <td>#LA001</td>
+                                                    <td>₹50,000</td>
+                                                    <td>12%</td>
+                                                    <td>01/01/2024</td>
+                                                    <td>01/01/2025</td>
+                                                    <td>12 months</td>
+                                                    <td><span class="status pending">Pending</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Home Loan</td>
+                                                    <td>#LA002</td>
+                                                    <td>₹5,00,000</td>
+                                                    <td>8.5%</td>
+                                                    <td>15/01/2024</td>
+                                                    <td>15/01/2034</td>
+                                                    <td>10 years</td>
+                                                    <td><span class="status accepted">Accepted</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Business Loan</td>
+                                                    <td>#LA003</td>
+                                                    <td>₹2,00,000</td>
+                                                    <td>15%</td>
+                                                    <td>01/02/2024</td>
+                                                    <td>01/02/2026</td>
+                                                    <td>24 months</td>
+                                                    <td><span class="status rejected">Rejected</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                
+                                <div class="application-profile">
+                                    <h3>My Application Profile</h3>
+                                    <div class="profile-charts">
+                                        <div class="chart-item">
+                                            <div class="progress-circle" data-progress="20">
+                                                <span class="progress-text">20%</span>
+                                            </div>
+                                            <div class="chart-info">
+                                                <span class="amount">$21,549</span>
+                                                <span class="label">Total Approved</span>
+                                            </div>
+                                        </div>
+                                        <div class="chart-item">
+                                            <div class="progress-circle" data-progress="60">
+                                                <span class="progress-text">60%</span>
+                                            </div>
+                                            <div class="chart-info">
+                                                <span class="amount">$9,540</span>
+                                                <span class="label">Total Disbursed</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <a href="#" class="view-report-link">Click here to view the complete report</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-
-        <div class="login-right">
-          <div class="login-form-container">
-            <div class="login-header">
-              <div class="logo-small">
-                <div class="logo-icon">L</div>
-                <span>LOAN ACCELERATOR</span>
-              </div>
+        
+        <!-- Right Section - Sign In Form -->
+        <div class="signin-section">
+            <div class="signin-content">
+                <div class="signin-logo">
+                    <div class="logo">
+                        <span>L</span>
+                    </div>
+                    <h2>LOAN ACCELERATOR</h2>
+                </div>
+                
+                <div class="signin-form">
+                    <h1>Sign In</h1>
+                    <p class="subtitle">Please select your role</p>
+                    
+                    <div class="role-selection">
+                        <button class="role-btn" data-role="customer">
+                            <i class="fas fa-user"></i>
+                            <span>Customer</span>
+                        </button>
+                        <button class="role-btn" data-role="manager">
+                            <i class="fas fa-users"></i>
+                            <span>Manager</span>
+                        </button>
+                    </div>
+                    
+                    <form class="login-form">
+                        <div class="form-group">
+                            <label for="email">Email ID</label>
+                            <input type="email" id="email" placeholder="Enter your email" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                        </div>
+                        
+                                            <div class="forgot-password">
+                            <a href="html/forgot-password.html">Forgot your password?</a>
+                        </div>
+                        
+                        <button type="submit" class="signin-btn">SIGN IN</button>
+                        
+                        <div class="auth-footer">
+                            <p>Don't have an account? <a href="html/register.html" class="link">Register</a></p>
+                        </div>
+                    </form>
+                </div>
             </div>
-
-            <div class="login-form-section">
-              <h2>Sign In</h2>
-              <p>Please select your role</p>
-
-              <div class="role-selector">
-                <button class="role-option" data-role="customer">
-                  <i class="fas fa-user"></i>
-                  <span>Customer</span>
-                </button>
-                <button class="role-option" data-role="manager">
-                  <i class="fas fa-users"></i>
-                  <span>Manager</span>
-                </button>
-              </div>
-
-              <form id="loginForm" class="login-form">
-                <div class="form-group">
-                  <label for="email">Email ID</label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="name@gmail.com"
-                    required
-                  />
-                </div>
-
-                <div class="form-group">
-                  <label for="password">Password</label>
-                  <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="At least 8 characters"
-                    required
-                  />
-                </div>
-
-                <div class="forgot-password">
-                  <a href="#">Forgot your password?</a>
-                </div>
-
-                <button type="submit" class="sign-in-btn" disabled>
-                  SIGN IN
-                </button>
-              </form>
-            </div>
-          </div>
         </div>
-      </div>
     </div>
-
-
-
-    <script src="js/app.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/dashboard.js"></script>
-    <script src="js/charts.js"></script>
-    <script src="js/api.js"></script>
-    <script src="js/enhanced-components.js"></script>
-  </body>
+    
+    <script src="js/main.js"></script>
+</body>
 </html>

@@ -4,83 +4,63 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Loan Application</title>
-    <link rel="stylesheet" href="styles/main.css" />
-    <link rel="stylesheet" href="styles/components.css" />
-    <link rel="stylesheet" href="styles/pages.css" />
-    <link rel="stylesheet" href="styles/loan-application.css" />
+    <link rel="stylesheet" href="../styles/main.css" />
+    <link rel="stylesheet" href="../styles/components.css" />
+    <link rel="stylesheet" href="../styles/pages.css" />
+    <link rel="stylesheet" href="../styles/loan-application.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
     />
   </head>
   <body>
-    <!-- Header -->
-    <header class="app-header">
-      <div class="header-left">
-        <div class="logo">
-          <i class="fas fa-clock"></i>
-          <span>LOAN ACCELERATOR</span>
-        </div>
-      </div>
-      <div class="header-center">
-        <div class="search-bar">
-          <i class="fas fa-search"></i>
-          <input type="text" placeholder="Search" />
-        </div>
-      </div>
-      <div class="header-right">
-        <div class="header-icons">
-          <div class="notification-icon">
-            <i class="fas fa-question-circle"></i>
-          </div>
-          <div class="notification-icon">
-            <i class="fas fa-bell"></i>
-            <span class="notification-badge">1</span>
-          </div>
-          <div class="user-profile">
-            <img
-              src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iMTYiIGZpbGw9IiM0Mjg1RjQiLz4KPHN2ZyB4PSI4IiB5PSI4IiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgZmlsbD0ibm9uZSI+CjxwYXRoIGQ9Ik04IDhDMTAuMjA5MSA4IDEyIDYuMjA5MTQgMTIgNEMxMiAxLjc5MDg2IDEwLjIwOTEgMCA4IDBDNS43OTA4NiAwIDQgMS43OTA4NiA0IDRDNCA2LjIwOTE0IDUuNzkwODYgOCA4IDhaIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNOCAxMEMzLjU4MTcyIDEwIDAgMTMuNTgxNyAwIDE4SDE2QzE2IDEzLjU4MTcgMTIuNDE4MyAxMCA4IDEwWiIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cjwvc3ZnPgo="
-              alt="User"
-            />
-          </div>
-        </div>
-      </div>
-    </header>
-
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <nav class="sidebar-nav">
-        <ul>
-          <li>
-            <a href="#" onclick="showDashboard()"
-              ><i class="fas fa-th-large"></i> Dashboard</a
-            >
-          </li>
-          <li class="active">
-            <a href="#" onclick="showLoanApplication()"
-              ><i class="fas fa-file-alt"></i> Apply Loan</a
-            >
-          </li>
-          <li>
-            <a href="#"><i class="fas fa-calculator"></i> EMI Calculator</a>
-          </li>
-          <li>
-            <a href="#"><i class="fas fa-tags"></i> FAQs</a>
-          </li>
-          <li>
-            <a href="#"><i class="fas fa-cog"></i> Settings</a>
-          </li>
-        </ul>
-      </nav>
-      <div class="sidebar-footer">
-        <button class="logout-btn" onclick="logout()">
-          <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
-      </div>
-    </aside>
-
-    <!-- Main Content -->
     <main class="main-content">
+      <!-- Left Sidebar -->
+      <div class="sidebar">
+        <div class="sidebar-header">
+          <div class="logo">
+            <span>L</span>
+          </div>
+          <h2>LOAN ACCELERATOR</h2>
+          <i class="fas fa-chevron-left toggle-btn"></i>
+        </div>
+
+        <nav class="sidebar-nav">
+          <a href="#" class="nav-item active">
+            <i class="fas fa-tachometer-alt"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="./loan-categories.html" class="nav-item">
+            <i class="fas fa-file-alt"></i>
+            <span>Apply Loan</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-list"></i>
+            <span>View Status</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-calculator"></i>
+            <span>EMI Calculator</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-question-circle"></i>
+            <span>FAQ'S</span>
+          </a>
+          <a href="#" class="nav-item">
+            <i class="fas fa-cog"></i>
+            <span>Settings</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <a href="#" class="nav-item logout">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+      </div>
+      <!-- Main Content -->
+
       <!-- Loan Category Selection Page -->
       <div id="loan-category-page" class="loan-page active">
         <div class="page-header">
@@ -1776,8 +1756,8 @@
       </div>
     </main>
 
-    <script src="js/app.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/loan-application.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/loan-application.js"></script>
   </body>
 </html>

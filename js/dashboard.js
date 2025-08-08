@@ -1,434 +1,373 @@
-/**
- * Dashboard Module
- * Handles dashboard functionality, data loading, and user interactions
- */
+// DOM Content Loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize all dashboard functionality
+    initializeSidebar();
+    initializeEMICalculator();
+    initializeProgressCircles();
+    initializeDashboardInteractions();
+    initializeNotifications();
+});
 
-// Dashboard service
-const DashboardService = {
-    // Base URL for dashboard API (placeholder for .NET backend)
-    apiBaseUrl: 'https://localhost:5001/api/dashboard',
+// Sidebar Functionality
+function initializeSidebar() {
+    const toggleBtn = document.querySelector('.toggle-btn');
+    const sidebar = document.querySelector('.sidebar');
+    const navItems = document.querySelectorAll('.nav-item');
     
-    /**
-     * Initialize dashboard when user logs in
-     */
-    async init() {
-        try {
-            // Load user data
-            await this.loadUserData();
-            
-            // Load application data
-            await this.loadApplicationData();
-            
-            // Initialize EMI calculator
-            this.initEMICalculator();
-            
-            // Initialize charts
-            if (window.ChartService) {
-                window.ChartService.initAllCharts();
-            }
-            
-            // Set up periodic data refresh
-            this.startDataRefresh();
-            
-        } catch (error) {
-            console.error('Dashboard initialization error:', error);
-            this.showError('Failed to load dashboard data');
-        }
-    },
-    
-    /**
-     * Load user profile data
-     */
-    async loadUserData() {
-        try {
-            // TODO: Replace with actual API call to .NET backend
-            // const token = AuthService.getToken();
-            // const response = await fetch(`${this.apiBaseUrl}/user`, {
-            //     headers: {
-            //         'Authorization': `Bearer ${token}`
-            //     }
-            // });
-            // const userData = await response.json();
-            
-            // Placeholder implementation
-            const userName = localStorage.getItem('userName') || 'John Mathew';
-            const userRole = localStorage.getItem('userRole') || 'customer';
-            
-            // Update UI with user data
-            const userNameElement = document.getElementById('userName');
-            if (userNameElement) {
-                userNameElement.textContent = userName;
-            }
-            
-            // Store user data for later use
-            this.userData = {
-                name: userName,
-                role: userRole,
-                hasAppliedForLoan: false,
-                eligibilityScore: 750,
-                creditStatus: 'Excellent'
-            };
-            
-        } catch (error) {
-            console.error('Error loading user data:', error);
-            throw error;
-        }
-    },
-    
-    /**
-     * Load application status data
-     */
-    async loadApplicationData() {
-        try {
-            // TODO: Replace with actual API call to .NET backend
-            // const token = AuthService.getToken();
-            // const response = await fetch(`${this.apiBaseUrl}/applications`, {
-            //     headers: {
-            //         'Authorization': `Bearer ${token}`
-            //     }
-            // });
-            // const applications = await response.json();
-            
-            // Placeholder data
-            const applications = [
-                {
-                    id: '#12345',
-                    type: 'Personal Loan',
-                    amount: 72207,
-                    interest: '12%',
-                    startDate: '01-16-2022',
-                    endDate: '01-16-2022',
-                    tenure: '6 Years',
-                    status: 'Pending'
-                },
-                {
-                    id: '#12346',
-                    type: 'Car Loan',
-                    amount: 72207,
-                    interest: '12%',
-                    startDate: '01-16-2022',
-                    endDate: '01-16-2022',
-                    tenure: '6 Years',
-                    status: 'Accepted'
-                },
-                {
-                    id: '#12347',
-                    type: 'Personal Loan',
-                    amount: 72207,
-                    interest: '12%',
-                    startDate: '01-16-2022',
-                    endDate: '01-16-2022',
-                    tenure: '6 Years',
-                    status: 'Pending'
-                },
-                {
-                    id: '#12348',
-                    type: 'Car Loan',
-                    amount: 72207,
-                    interest: '12%',
-                    startDate: '01-16-2022',
-                    endDate: '01-16-2022',
-                    tenure: '6 Years',
-                    status: 'Rejected'
-                },
-                {
-                    id: '#12349',
-                    type: 'Personal Loan',
-                    amount: 72207,
-                    interest: '12%',
-                    startDate: '01-16-2022',
-                    endDate: '01-16-2022',
-                    tenure: '6 Years',
-                    status: 'Pending'
-                },
-                {
-                    id: '#12350',
-                    type: 'Car Loan',
-                    amount: 72207,
-                    interest: '12%',
-                    startDate: '01-16-2022',
-                    endDate: '01-16-2022',
-                    tenure: '6 Years',
-                    status: 'Accepted'
-                }
-            ];
-            
-            // Update application status table
-            this.updateApplicationTable(applications);
-            
-            // Update application profile charts
-            this.updateApplicationProfile();
-            
-        } catch (error) {
-            console.error('Error loading application data:', error);
-            throw error;
-        }
-    },
-    
-    /**
-     * Update application status table
-     * @param {Array} applications - Array of application objects
-     */
-    updateApplicationTable(applications) {
-        const tableBody = document.getElementById('applicationTableBody');
-        if (!tableBody) return;
-        
-        tableBody.innerHTML = '';
-        
-        applications.forEach(app => {
-            const row = document.createElement('div');
-            row.className = 'table-row';
-            
-            row.innerHTML = `
-                <div>${app.type}</div>
-                <div>${app.id}</div>
-                <div>₹ ${app.amount.toLocaleString()}</div>
-                <div>${app.interest}</div>
-                <div>${app.startDate}</div>
-                <div>${app.endDate}</div>
-                <div>${app.tenure}</div>
-                <div><span class="status-badge status-${app.status.toLowerCase()}">${app.status}</span></div>
-            `;
-            
-            tableBody.appendChild(row);
+    // Toggle sidebar on mobile
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
         });
-    },
-    
-    /**
-     * Update application profile section
-     */
-    updateApplicationProfile() {
-        // This will be handled by the chart service
-        // Update profile statistics
-        const profileData = {
-            carLoan: {
-                percentage: 20,
-                amount: 21549,
-                remaining: '4 Years are remaining in pay 100% loan'
-            },
-            personalLoan: {
-                percentage: 60,
-                amount: 9540,
-                remaining: '4 Years are remaining in pay 100% loan'
-            }
-        };
-        
-        // Store for chart rendering
-        this.profileData = profileData;
-    },
-    
-    /**
-     * Initialize EMI Calculator
-     */
-    initEMICalculator() {
-        const loanTypeSelect = document.getElementById('loanType');
-        const loanAmountInput = document.getElementById('loanAmount');
-        const loanTenureSelect = document.getElementById('loanTenure');
-        const applyBtn = document.querySelector('.apply-btn');
-        
-        // Add event listeners for real-time calculation
-        [loanTypeSelect, loanAmountInput, loanTenureSelect].forEach(element => {
-            if (element) {
-                element.addEventListener('change', () => this.calculateEMI());
-                element.addEventListener('input', () => this.calculateEMI());
-            }
-        });
-        
-        // Apply button functionality
-        if (applyBtn) {
-            applyBtn.addEventListener('click', () => this.handleLoanApplication());
-        }
-        
-        // Initial calculation
-        this.calculateEMI();
-    },
-    
-    /**
-     * Calculate EMI based on current inputs
-     */
-    async calculateEMI() {
-        try {
-            const loanType = document.getElementById('loanType')?.value || 'Personal Loan';
-            const loanAmount = parseFloat(document.getElementById('loanAmount')?.value) || 300000;
-            const loanTenure = document.getElementById('loanTenure')?.value || '2years';
-            
-            // TODO: Replace with actual API call to .NET backend
-            // const response = await fetch(`${this.apiBaseUrl}/calculate-emi`, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': `Bearer ${AuthService.getToken()}`
-            //     },
-            //     body: JSON.stringify({ loanType, loanAmount, loanTenure })
-            // });
-            // const calculation = await response.json();
-            
-            // Placeholder calculation logic
-            const tenureYears = parseInt(loanTenure.replace('years', ''));
-            const interestRate = this.getInterestRate(loanType);
-            const monthlyRate = interestRate / 100 / 12;
-            const totalMonths = tenureYears * 12;
-            
-            // EMI calculation formula
-            const emi = (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalMonths)) / 
-                       (Math.pow(1 + monthlyRate, totalMonths) - 1);
-            
-            const totalAmount = emi * totalMonths;
-            const totalInterest = totalAmount - loanAmount;
-            
-            // Update UI
-            this.updateEMIDisplay({
-                emi: Math.round(emi),
-                principal: loanAmount,
-                interest: Math.round(totalInterest),
-                interestRate: interestRate
-            });
-            
-            // Update chart
-            if (window.ChartService) {
-                window.ChartService.updateEMIChart(loanAmount, Math.round(totalInterest));
-            }
-            
-        } catch (error) {
-            console.error('EMI calculation error:', error);
-        }
-    },
-    
-    /**
-     * Get interest rate based on loan type
-     * @param {string} loanType - Type of loan
-     * @returns {number} - Interest rate percentage
-     */
-    getInterestRate(loanType) {
-        const rates = {
-            'Personal Loan': 7.21,
-            'Car Loan': 6.5,
-            'Home Loan': 5.8
-        };
-        return rates[loanType] || 7.21;
-    },
-    
-    /**
-     * Update EMI display in UI
-     * @param {Object} calculation - Calculation results
-     */
-    updateEMIDisplay(calculation) {
-        const emiAmountElement = document.getElementById('emiAmount');
-        const principalAmountElement = document.getElementById('principalAmount');
-        const interestAmountElement = document.getElementById('interestAmount');
-        const interestRateElement = document.getElementById('interestRate');
-        
-        if (emiAmountElement) {
-            emiAmountElement.textContent = calculation.emi.toLocaleString();
-        }
-        
-        if (principalAmountElement) {
-            principalAmountElement.textContent = `₹ ${calculation.principal.toLocaleString()}`;
-        }
-        
-        if (interestAmountElement) {
-            interestAmountElement.textContent = `₹ ${calculation.interest.toLocaleString()}`;
-        }
-        
-        if (interestRateElement) {
-            interestRateElement.textContent = `${calculation.interestRate}%`;
-        }
-    },
-    
-    /**
-     * Handle loan application submission
-     */
-    async handleLoanApplication() {
-        try {
-            const loanType = document.getElementById('loanType')?.value;
-            const loanAmount = document.getElementById('loanAmount')?.value;
-            const loanTenure = document.getElementById('loanTenure')?.value;
-            
-            if (!loanType || !loanAmount || !loanTenure) {
-                this.showError('Please fill in all loan details');
-                return;
-            }
-            
-            // Show loading state
-            const applyBtn = document.querySelector('.apply-btn');
-            const originalText = applyBtn.textContent;
-            applyBtn.textContent = 'APPLYING...';
-            applyBtn.disabled = true;
-            
-            // TODO: Replace with actual API call to .NET backend
-            // const response = await fetch(`${this.apiBaseUrl}/apply`, {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //         'Authorization': `Bearer ${AuthService.getToken()}`
-            //     },
-            //     body: JSON.stringify({
-            //         loanType,
-            //         amount: parseFloat(loanAmount),
-            //         tenure: loanTenure
-            //     })
-            // });
-            
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            
-            // Show success message
-            this.showSuccess('Loan application submitted successfully! You will receive a confirmation email shortly.');
-            
-            // Refresh application data
-            await this.loadApplicationData();
-            
-        } catch (error) {
-            console.error('Loan application error:', error);
-            this.showError('Failed to submit loan application. Please try again.');
-        } finally {
-            // Reset button state
-            const applyBtn = document.querySelector('.apply-btn');
-            applyBtn.textContent = 'APPLY NOW';
-            applyBtn.disabled = false;
-        }
-    },
-    
-    /**
-     * Start periodic data refresh
-     */
-    startDataRefresh() {
-        // Refresh data every 5 minutes
-        setInterval(async () => {
-            try {
-                await this.loadApplicationData();
-            } catch (error) {
-                console.error('Data refresh error:', error);
-            }
-        }, 5 * 60 * 1000);
-    },
-    
-    /**
-     * Show success message
-     * @param {string} message - Success message
-     */
-    showSuccess(message) {
-        if (window.appUtils) {
-            window.appUtils.showMessage(message, 'success');
-        }
-    },
-    
-    /**
-     * Show error message
-     * @param {string} message - Error message
-     */
-    showError(message) {
-        if (window.appUtils) {
-            window.appUtils.showMessage(message, 'error');
-        }
     }
-};
+    
+    // Navigation item clicks
+    navItems.forEach(item => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // Remove active class from all items
+            navItems.forEach(nav => nav.classList.remove('active'));
+            
+            // Add active class to clicked item
+            this.classList.add('active');
+            
+            // Show notification for navigation
+            const pageName = this.querySelector('span').textContent;
+            showNotification(`Navigating to ${pageName}`, 'info');
 
-// Initialize dashboard when called from main app
-function initDashboard() {
-    DashboardService.init();
+            if (pageName === 'Dashboard') {
+                window.location.href = '../html/customer-dashboard.html';
+            }
+
+            if (pageName === 'Profile') {
+                window.location.href = '../html/customer-profile.html';
+            }
+
+            if (pageName === 'Settings') {
+                window.location.href = '../html/customer-settings.html';
+            }
+
+            if (pageName === 'Apply Loan') {
+                window.location.href = '../html/customer-apply-loan.html';
+            }
+
+            // Handle logout
+            if (this.classList.contains('logout')) {
+                showNotification('Logging out...', 'info');
+                setTimeout(() => {
+                    window.location.href = '../index.html';
+                }, 1000);
+            }
+        });
+    });
 }
 
-// Export for use in other modules
-window.DashboardService = DashboardService;
-window.initDashboard = initDashboard;
+// EMI Calculator Functionality
+function initializeEMICalculator() {
+    const loanAmountInput = document.querySelector('.loan-amount');
+    const interestRateInput = document.querySelector('.interest-rate');
+    const loanTenureSelect = document.querySelector('.loan-tenure');
+    const emiAmount = document.querySelector('.emi-amount');
+    const emiSummaryValues = document.querySelectorAll('.summary-item .value');
+    
+    function calculateEMI() {
+        // Extract numeric values
+        const principal = parseFloat(loanAmountInput.value.replace(/,/g, '')) || 0;
+        const rate = parseFloat(interestRateInput.value.replace('%', '')) || 0;
+        const time = parseInt(loanTenureSelect.value) || 0;
+        
+        if (principal > 0 && rate > 0 && time > 0) {
+            const monthlyRate = rate / 12 / 100;
+            const numberOfPayments = time * 12;
+            
+            const emi = principal * monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments) / 
+                      (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
+            
+            const totalAmount = emi * numberOfPayments;
+            const totalInterest = totalAmount - principal;
+            
+            // Update EMI display
+            emiAmount.textContent = `EMI ₹${Math.round(emi).toLocaleString()}/month`;
+            
+            // Update summary values
+            if (emiSummaryValues.length >= 2) {
+                emiSummaryValues[0].textContent = `₹${Math.round(emi).toLocaleString()}`;
+                emiSummaryValues[1].textContent = `₹${Math.round(totalAmount).toLocaleString()}`;
+            }
+            
+            // Update pie chart
+            updatePieChart(principal, totalInterest);
+        }
+    }
+    
+    function updatePieChart(principal, interest) {
+        const pieChart = document.querySelector('.pie-chart');
+        const total = principal + interest;
+        const principalPercentage = (principal / total) * 100;
+        const interestPercentage = (interest / total) * 100;
+        
+        pieChart.style.background = `conic-gradient(#f97316 0deg ${principalPercentage * 3.6}deg, #ef4444 ${principalPercentage * 3.6}deg 360deg)`;
+    }
+    
+    // Add event listeners for real-time calculation
+    [loanAmountInput, interestRateInput, loanTenureSelect].forEach(input => {
+        input.addEventListener('input', calculateEMI);
+        input.addEventListener('change', calculateEMI);
+    });
+    
+    // Initial calculation
+    calculateEMI();
+}
+
+// Progress Circles Animation
+function initializeProgressCircles() {
+    const progressCircles = document.querySelectorAll('.progress-circle');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateProgressCircle(entry.target);
+            }
+        });
+    });
+    
+    progressCircles.forEach(circle => {
+        observer.observe(circle);
+    });
+}
+
+function animateProgressCircle(circle) {
+    const progress = parseInt(circle.dataset.progress);
+    const progressText = circle.querySelector('.progress-text');
+    
+    let currentProgress = 0;
+    const interval = setInterval(() => {
+        currentProgress += 1;
+        progressText.textContent = `${currentProgress}%`;
+        
+        if (currentProgress >= progress) {
+            clearInterval(interval);
+        }
+    }, 20);
+}
+
+// Dashboard Interactions
+function initializeDashboardInteractions() {
+    // Apply Now button
+    const applyBtn = document.querySelector('.apply-btn');
+    if (applyBtn) {
+        applyBtn.addEventListener('click', function() {
+            showNotification('Redirecting to loan application form...', 'info');
+        });
+    }
+    
+    // Generate Report button
+    const generateReport = document.querySelector('.generate-report');
+    if (generateReport) {
+        generateReport.addEventListener('click', function(e) {
+            e.preventDefault();
+            showNotification('Generating credit report...', 'info');
+            
+            setTimeout(() => {
+                showNotification('Credit report generated successfully!', 'success');
+            }, 2000);
+        });
+    }
+    
+    // View Report link
+    const viewReportLink = document.querySelector('.view-report-link');
+    if (viewReportLink) {
+        viewReportLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            showNotification('Loading complete report...', 'info');
+        });
+    }
+    
+    // Search functionality
+    const searchInput = document.querySelector('.search-bar input');
+    if (searchInput) {
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                showNotification(`Searching for: ${this.value}`, 'info');
+            }
+        });
+    }
+    
+    // Top icons functionality
+    const topIcons = document.querySelectorAll('.top-icons i, .top-icons .notification-icon, .top-icons .user-avatar');
+    topIcons.forEach(icon => {
+        icon.addEventListener('click', function() {
+            const iconClass = this.className;
+            let action = '';
+            
+            if (iconClass.includes('fa-question-circle')) {
+                action = 'Help Center';
+            } else if (iconClass.includes('fa-bell') || iconClass.includes('notification-icon')) {
+                action = 'Notifications';
+            } else if (iconClass.includes('fa-user') || iconClass.includes('user-avatar')) {
+                action = 'User Profile';
+            }
+            
+            showNotification(`Opening ${action}`, 'info');
+        });
+    });
+}
+
+// Notification System
+function initializeNotifications() {
+    // Create notification container
+    const notificationContainer = document.createElement('div');
+    notificationContainer.className = 'notification-container';
+    notificationContainer.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    `;
+    document.body.appendChild(notificationContainer);
+}
+
+function showNotification(message, type = 'info') {
+    const notificationContainer = document.querySelector('.notification-container');
+    
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.innerHTML = `
+        <div class="notification-content">
+            <span class="notification-message">${message}</span>
+            <button class="notification-close">&times;</button>
+        </div>
+    `;
+    
+    // Add styles
+    notification.style.cssText = `
+        background: ${type === 'error' ? '#fee2e2' : type === 'success' ? '#d1fae5' : '#eff6ff'};
+        color: ${type === 'error' ? '#dc2626' : type === 'success' ? '#059669' : '#3b82f6'};
+        padding: 1rem 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 300px;
+        animation: slideIn 0.3s ease-out;
+        border-left: 4px solid ${type === 'error' ? '#dc2626' : type === 'success' ? '#059669' : '#3b82f6'};
+    `;
+    
+    // Add animation styles
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // Add to container
+    notificationContainer.appendChild(notification);
+    
+    // Close button functionality
+    const closeBtn = notification.querySelector('.notification-close');
+    closeBtn.addEventListener('click', () => {
+        notification.remove();
+    });
+    
+    // Auto remove after 3 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 3000);
+}
+
+// Utility Functions
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-IN', {
+        style: 'currency',
+        currency: 'INR'
+    }).format(amount);
+}
+
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Add loading states to buttons
+document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', function() {
+        if (!this.classList.contains('loading')) {
+            this.classList.add('loading');
+            this.style.pointerEvents = 'none';
+            
+            setTimeout(() => {
+                this.classList.remove('loading');
+                this.style.pointerEvents = 'auto';
+            }, 2000);
+        }
+    });
+});
+
+// Add hover effects for interactive elements
+document.querySelectorAll('.nav-item, .apply-btn, .generate-report, .view-report-link, .top-icons i, .top-icons .notification-icon, .top-icons .user-avatar').forEach(element => {
+    element.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px)';
+        this.style.transition = 'transform 0.2s ease';
+    });
+    
+    element.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+    });
+});
+
+// Add smooth scrolling for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Add keyboard shortcuts
+document.addEventListener('keydown', function(e) {
+    // Ctrl/Cmd + K for search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        const searchInput = document.querySelector('.search-bar input');
+        if (searchInput) {
+            searchInput.focus();
+        }
+    }
+    
+    // Escape to close sidebar on mobile
+    if (e.key === 'Escape') {
+        const sidebar = document.querySelector('.sidebar');
+        if (sidebar && sidebar.classList.contains('open')) {
+            sidebar.classList.remove('open');
+        }
+    }
+});
+
+console.log('Customer Dashboard initialized successfully!'); 
